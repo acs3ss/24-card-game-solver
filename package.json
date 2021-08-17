@@ -4,8 +4,8 @@
   "description": "24 solver",
   "main": "./dist/main.js",
   "scripts": {
-    "build": "webpack --progress",
-    "run": "node ./dist/main.js",
+    "build": "webpack --progress --mode production",
+    "build:dev": "webpack --progress --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
