@@ -9,11 +9,9 @@
     <!-- TODO: Install via npm -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-    <!-- <link href="style.css" rel="stylesheet"> -->
 </head>
 <body class="container-fluid">
-    <div class="row justify-content-evenly">
+    <div class="row justify-content-around">
         <div id="card1-container" class="col-auto mx-3">
             <div class="card-select">
                 <label for="card1" class="form-label">Card 1</label>
@@ -113,7 +111,7 @@
 
     <button type="submit" id="solve" name="solve" class="btn btn-primary">Solve</button>
 
-    <div id="solutions"></div>
+    <div id="solutions" class="row my-3"></div>
 
     <script src="./dist/main.js"></script>
 </body>

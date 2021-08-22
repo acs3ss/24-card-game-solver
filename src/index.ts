@@ -33,6 +33,7 @@ function solve() {
   if (solutions.length !== 0) {
     const solutionElements = Solver.print(solutions).map(output => {
       const solutionElement = document.createElement("pre");
+      solutionElement.classList.add("text-center", "col-12", "col-sm-4", "col-md-3", "col-lg-2");
       solutionElement.innerText = output;
       return solutionElement;
     });
