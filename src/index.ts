@@ -13,7 +13,16 @@ for (const elem of document.getElementsByClassName("card-picker")) {
 (document.getElementById("solve") as HTMLButtonElement).addEventListener("click", solve);
 
 function solve() {
-  const cards = parse();
+  const cards: number[] = [];
+  for (let i = 1; i <= 4; i++) {
+    const value = Number((document.getElementById(`card${i}`) as HTMLSelectElement).value);
+    if (value >= 1 && value <= 13) {
+      cards.push(value);
+    } else {
+      alert(`Card ${i} is invalid`);
+      return;
+    }
+  }
 
   const solutionsDiv = document.getElementById("solutions") as HTMLDivElement;
   while (solutionsDiv.lastElementChild) {
@@ -33,28 +42,6 @@ function solve() {
     noSolutionsElement.innerText = "No solutions";
     solutionsDiv.appendChild(noSolutionsElement);
   }
-}
-
-function parse(): number[] {
-  const cards: number[] = [];
-  for (let i = 1; i <= 4; i++) {
-    const value = (document.getElementById(`card${i}`) as HTMLInputElement).value;
-    const number = Number(value);
-    if (number >= 1 && number <= 13) {
-      cards.push(number);
-    } else if (/^(j|jack)$/i.test(value)) {
-      cards.push(11);
-    } else if (/^(q|queen)$/i.test(value)) {
-      cards.push(12);
-    } else if (/^(k|king)$/i.test(value)) {
-      cards.push(13);
-    } else if (/^(a|ace)$/i.test(value)) {
-      cards.push(1);
-    } else {
-      alert(`Card ${i} is invalid`);
-    }
-  }
-  return cards;
 }
 
 function updateImage(elem: HTMLSelectElement): void {
