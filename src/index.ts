@@ -1,5 +1,15 @@
 import { Solver } from './solver';
 
+(document.getElementById("card1") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
+(document.getElementById("card2") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
+(document.getElementById("card3") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
+(document.getElementById("card4") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
+
+for (const elem of document.getElementsByClassName("card-picker")) {
+  updateImage(elem as HTMLSelectElement);
+  elem.addEventListener("change", event => updateImage(event.target as HTMLSelectElement));
+}
+
 (document.getElementById("solve") as HTMLButtonElement).addEventListener("click", solve);
 
 function solve() {
@@ -45,4 +55,12 @@ function parse(): number[] {
     }
   }
   return cards;
+}
+
+function updateImage(elem: HTMLSelectElement): void {
+  const imageElem = elem.parentElement?.parentElement?.getElementsByClassName("card-image")[0].getElementsByTagName("img")[0]!;
+  const face = ["Clubs", "Diamonds", "Hearts", "Spades"][Math.floor(Math.random() * 4)];
+  imageElem.src = `images/light/${elem.value}${face[0]}.svg`;
+  imageElem.alt = `${elem.value} of ${face}`;
+  imageElem.title = `${elem.value} of ${face}`;
 }
