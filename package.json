@@ -1,6 +1,7 @@
 {
   "name": "24-card-game-solver",
   "version": "1.0.0",
+  "private": true,
   "description": "24 solver",
   "main": "./dist/main.js",
   "scripts": {
