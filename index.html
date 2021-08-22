@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24 Solver</title>
+
+    <!-- TODO: Install via npm -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="container-fluid">
+    <div class="grid">
+        <div id="card1-container">
+            <div class="card-select">
+                <label for="card1" class="form-label">Card 1</label>
+                <select name="card1" id="card1" class="card-picker form-select" required>
+                    <option value="1">Ace</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">Jack</option>
+                    <option value="12">Queen</option>
+                    <option value="13">King</option>
+                </select>
+            </div>
+            <div class="card-image p-3">
+                <img src="">
+            </div>
+        </div>
+
+        <div id="card2-container">
+            <div class="card-select">
+                <label for="card2" class="form-label">Card 2</label>
+                <select name="card2" id="card2" class="card-picker form-select" required>
+                    <option value="1">Ace</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">Jack</option>
+                    <option value="12">Queen</option>
+                    <option value="13">King</option>
+                </select>
+            </div>
+            <div class="card-image p-3">
+                <img src="">
+            </div>
+        </div>
+
+        <div id="card3-container">
+            <div class="card-select">
+                <label for="card3" class="form-label">Card 3</label>
+                <select name="card3" id="card3" class="card-picker form-select" required>
+                    <option value="1">Ace</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">Jack</option>
+                    <option value="12">Queen</option>
+                    <option value="13">King</option>
+                </select>
+            </div>
+            <div class="card-image p-3">
+                <img src="">
+            </div>
+        </div>
+
+        <div id="card4-container">
+            <div class="card-select">
+                <label for="card4" class="form-label">Card 4</label>
+                <select name="card4" id="card4" class="card-picker form-select" required>
+                    <option value="1">Ace</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">4</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">Jack</option>
+                    <option value="12">Queen</option>
+                    <option value="13">King</option>
+                </select>
+            </div>
+            <div class="card-image p-3">
+                <img src="">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" id="solve" name="solve" class="btn btn-primary">Solve</button>
+
+    <div id="solutions"></div>
+
+    <script src="./dist/main.js"></script>
+</body>
+</html>
