@@ -1,5 +1,10 @@
+import * as Vue from 'vue';
+import CardForm from './components/CardForm.vue';
 import { Solver } from './solver';
 
+const app = Vue.createApp(CardForm);
+const vm = app.mount('#app');
+/*
 (document.getElementById("card1") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
 (document.getElementById("card2") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
 (document.getElementById("card3") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
@@ -52,3 +57,4 @@ function updateImage(elem: HTMLSelectElement): void {
   imageElem.alt = `${elem.value} of ${face}`;
   imageElem.title = `${elem.value} of ${face}`;
 }
+*/

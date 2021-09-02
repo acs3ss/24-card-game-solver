@@ -1,5 +1,5 @@
-import { BaseN, Permutation } from 'js-combinatorics';
-import * as operations from './operation';
+import { BaseN, Permutation } from "js-combinatorics";
+import * as operations from "./operation";
 
 interface Solution {
   operations: operations.Operation[];
@@ -9,14 +9,18 @@ interface Solution {
 
 export class Solver {
   private static ops = [
-    operations.Add, operations.Subtract, operations.Multiply,
-    operations.Divide, operations.Exponent, operations.Log
+    operations.Add,
+    operations.Subtract,
+    operations.Multiply,
+    operations.Divide,
+    operations.Exponent,
+    operations.Log,
   ];
 
   static solve(hand: number[]): Solution[] {
     const solutions: Solution[] = [];
     const hands: number[][] = [];
-    for (let i = 0; i < 2 ** hand.filter(card => card > 10).length; i++) {
+    for (let i = 0; i < 2 ** hand.filter((card) => card > 10).length; i++) {
       const newHand: number[] = [];
       let face = 1;
       for (const card of hand) {
@@ -104,7 +108,7 @@ export class Solver {
 
   static print(solutions: Solution[]): string[] {
     const outputs: string[] = [];
-    for (const {operations, parentheses, solution} of solutions) {
+    for (const { operations, parentheses, solution } of solutions) {
       if (parentheses === 0) {
         // (a b) (c d)
         const left = `(${operations[0].toString(solution[0], solution[1])})`;
