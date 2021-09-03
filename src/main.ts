@@ -1,8 +1,8 @@
 import * as Vue from 'vue';
-import CardForm from './components/CardForm.vue';
+import App from './App.vue';
 import { Solver } from './solver';
 
-const app = Vue.createApp(CardForm);
+const app = Vue.createApp(App);
 const vm = app.mount('#app');
 /*
 (document.getElementById("card1") as HTMLSelectElement).value = Math.floor(1 + Math.random() * 13).toString();
