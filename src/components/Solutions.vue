@@ -6,9 +6,7 @@
       v-for="(solution, index) in solutions"
       :key="index"
       class="text-center col-12 col-sm-4 col-md-3 col-lg-2"
-    >
-      {{ solution }}
-    </pre>
+    >{{ solution }}</pre>
   </div>
 </template>
 

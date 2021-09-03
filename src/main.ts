@@ -1,5 +1,6 @@
 import * as Vue from 'vue';
 import App from './App.vue';
+import './main.scss';
 import { Solver } from './solver';
 
 const app = Vue.createApp(App);
