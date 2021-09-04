@@ -12,3 +12,8 @@
 @import "~bootstrap/scss/forms";
 
 @import "~bootstrap/scss/utilities/api";
+
+.btn:disabled {
+    pointer-events: auto;
+    cursor: not-allowed;
+}

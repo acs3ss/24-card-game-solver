@@ -4,6 +4,7 @@
       <label :for="`card${id}`" class="form-label">Card {{ id }}</label>
       <select
         :name="`card${id}`"
+        :id="`card${id}`"
         v-model="selected"
         class="card-picker form-select"
         required
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent } from "vue";
 
 interface Image {
   src: string;
@@ -47,38 +48,41 @@ const cards = [
 const faces = ["Clubs", "Diamonds", "Hearts", "Spades"];
 
 export default defineComponent({
-  setup(props, { emit }) {
-    const selected = ref(1 + Math.floor(Math.random() * 13));
-
-    const updateImage = (): Image => {
-      const face = faces[Math.floor(Math.random() * 4)];
-      return {
-        src: `images/light/${selected.value}${face[0]}.svg`,
-        alt: `${cards[selected.value - 1].text} of ${face}`,
-        title: `${cards[selected.value - 1].text} of ${face}`,
-      };
-    };
-
-    const image = ref(updateImage());
-    emit("select", selected.value);
-
-    watch(selected, (newValue) => {
-      emit("select", newValue);
-      image.value = updateImage();
-    });
-
-    return {
-      selected,
-      image,
-    };
-  },
   props: {
-    id: Number,
+    id: {
+      type: Number,
+      required: true,
+    },
+    value: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
       cards,
+      selected: this.value,
+      image: this.getImage(this.value),
     };
+  },
+  watch: {
+    selected(newValue) {
+      this.image = this.getImage(newValue);
+      this.$emit("select", newValue);
+    },
+    value(newValue) {
+      this.selected = newValue;
+    },
+  },
+  methods: {
+    getImage(value: number): Image {
+      const face = faces[Math.floor(Math.random() * 4)];
+      return {
+        src: `images/light/${value}${face[0]}.svg`,
+        alt: `${cards[value - 1].text} of ${face}`,
+        title: `${cards[value - 1].text} of ${face}`,
+      };
+    },
   },
   emits: {
     select(selected: number) {

@@ -1,29 +1,54 @@
 <template>
-  <card-form @solve="solve" />
-  <solutions v-if="solutionsRequested" :solutions="solutions" />
+  <hand @handUpdated="updateHand" :hand="hand" />
+  <solutions @redraw="redraw" :solutions="solutions" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CardForm from "./components/CardForm.vue";
+import Hand, { Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
 import { Solver } from "./solver";
 
 export default defineComponent({
   components: {
-    CardForm,
+    Hand,
     Solutions,
   },
   data() {
+    const hand = this.generateHand();
     return {
-      solutions: [] as string[],
-      solutionsRequested: false,
+      hand,
+      solutions: this.solve(hand),
     };
   },
   methods: {
+    generateHand() {
+      return [
+        this.getRandomValue(),
+        this.getRandomValue(),
+        this.getRandomValue(),
+        this.getRandomValue(),
+      ];
+    },
     solve(hand: number[]) {
-      this.solutions = Solver.print(Solver.solve(hand));
-      this.solutionsRequested = true;
+      return Solver.print(Solver.solve(hand));
+    },
+    updateHand({ id, value }: Card) {
+      this.hand[id] = value;
+    },
+    redraw() {
+      this.hand = this.generateHand();
+    },
+    getRandomValue() {
+      return 1 + Math.floor(Math.random() * 13);
+    },
+  },
+  watch: {
+    hand: {
+      handler(newValue) {
+        this.solutions = this.solve(newValue);
+      },
+      deep: true,
     },
   },
 });
