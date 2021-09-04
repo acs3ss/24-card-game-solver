@@ -1,14 +1,29 @@
 <template>
-  <div class="row my-3">
-    <span v-if="solutions.length === 0">No solutions</span>
-    <pre
-      v-else
-      v-for="(solution, index) in solutions"
-      :key="index"
-      class="text-center col-12 col-sm-4 col-md-3 col-lg-2"
-    >
-      {{ solution }}
-    </pre>
+  <div class="my-3">
+    <div class="text-center">
+      <p class="fs-1 fw-light">
+        {{ hasSolutions ? "Solutions found!" : "No solutions" }}
+      </p>
+      <button
+        class="btn btn-primary mx-1"
+        :disabled="!hasSolutions"
+        @click="toggleSolutions"
+      >
+        {{ showSolutions ? "Hide" : "Show" }} solutions
+      </button>
+      <button class="btn btn-secondary mx-1" @click="$emit('redraw')">
+        Draw again
+      </button>
+    </div>
+    <div v-if="showSolutions" class="row my-3">
+      <pre
+        v-for="(solution, index) in solutions"
+        :key="index"
+        class="text-center col-12 col-sm-4 col-md-3 col-lg-2"
+      >
+        {{ solution }}
+      </pre>
+    </div>
   </div>
 </template>
 
@@ -16,7 +31,33 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   props: {
-    solutions: Array,
+    solutions: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      showSolutions: false,
+    };
+  },
+  methods: {
+    toggleSolutions() {
+      this.showSolutions = !this.showSolutions;
+    },
+  },
+  emits: {
+    redraw: null,
+  },
+  computed: {
+    hasSolutions() {
+      return this.solutions.length !== 0;
+    },
+  },
+  watch: {
+    solutions() {
+      this.showSolutions = false;
+    },
   },
 });
 </script>

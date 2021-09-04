@@ -1,5 +1,7 @@
 # 24-card-game-solver
 
+Available online at https://acs3ss.github.io/24-card-game-solver! 
+
 ## Python usage
 
 ```python
@@ -10,11 +12,11 @@ Two game modes:
 - Play 24 with randomly generated cards 
 - Check solutions
 
-## Web usage
+## Web development
 
 1. `npm install`
-1. `npm run build`
-2. Open `index.html` in a web browser.
+1. `npm run serve`
+1. Open http://localhost:8080
 
 ## Acknowledgements
 
