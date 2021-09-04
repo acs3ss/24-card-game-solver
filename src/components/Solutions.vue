@@ -6,7 +6,9 @@
       v-for="(solution, index) in solutions"
       :key="index"
       class="text-center col-12 col-sm-4 col-md-3 col-lg-2"
-    >{{ solution }}</pre>
+    >
+      {{ solution }}
+    </pre>
   </div>
 </template>
 
@@ -18,3 +20,12 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+pre {
+  // prettier insists for the solution to be on a newline,
+  // which adds unnecessary whitespace that white-space: pre preserves,
+  // so we need to explicitly ignore the extra padding :/.
+  white-space: normal;
+}
+</style>
