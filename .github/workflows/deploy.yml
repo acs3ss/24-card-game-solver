@@ -18,14 +18,7 @@ jobs:
       - name: npm run build
         run: npm run build
 
-      - name: Copy necessary files
-        run: |
-          mkdir deploy
-          cp -r dist deploy
-          cp -r images deploy
-          cp index.html deploy
-
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
-          folder: deploy
+          folder: dist
