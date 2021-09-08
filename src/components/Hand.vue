@@ -5,6 +5,7 @@
       :id="id"
       :key="id"
       :value="hand[id - 1]"
+      :colorScheme="colorScheme"
       @select="updateHand(id - 1, $event)"
     />
   </div>
@@ -26,6 +27,10 @@ export default defineComponent({
   props: {
     hand: {
       type: Array,
+      required: true,
+    },
+    colorScheme: {
+      type: String,
       required: true,
     },
   },

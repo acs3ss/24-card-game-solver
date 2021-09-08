@@ -57,6 +57,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    colorScheme: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -73,12 +77,16 @@ export default defineComponent({
     value(newValue) {
       this.selected = newValue;
     },
+    colorScheme() {
+      this.image = this.getImage(this.value);
+    },
   },
   methods: {
+    // TODO: Can this be computed instead?
     getImage(value: number): Image {
       const face = faces[Math.floor(Math.random() * 4)];
       return {
-        src: `images/light/${value}${face[0]}.svg`,
+        src: `images/${this.colorScheme}/${value}${face[0]}.svg`,
         alt: `${cards[value - 1].text} of ${face}`,
         title: `${cards[value - 1].text} of ${face}`,
       };
