@@ -1,5 +1,5 @@
 <template>
-  <hand @handUpdated="updateHand" :hand="hand" />
+  <hand @handUpdated="updateHand" :hand="hand" :colorScheme="colorScheme" />
   <solutions @redraw="redraw" :solutions="solutions" />
 </template>
 
@@ -16,9 +16,16 @@ export default defineComponent({
   },
   data() {
     const hand = this.generateHand();
+    // Query for dark, so that if prefers-color-scheme isn't supported
+    // we fall back to light
+    const colorScheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
     return {
       hand,
       solutions: this.solve(hand),
+      colorScheme,
     };
   },
   methods: {
@@ -50,6 +57,15 @@ export default defineComponent({
       },
       deep: true,
     },
+  },
+  mounted() {
+    // Query for dark, so that if prefers-color-scheme isn't supported
+    // we fall back to light
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        this.colorScheme = event.matches ? "dark" : "light";
+      });
   },
 });
 </script>
