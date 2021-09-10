@@ -1,12 +1,12 @@
 <template>
-  <div class="col-auto mx-3">
+  <div class="col-auto card-responsive">
     <div class="card-select">
       <label :for="`card${id}`" class="form-label">Card {{ id }}</label>
       <select
         :name="`card${id}`"
         :id="`card${id}`"
         v-model="selected"
-        class="card-picker form-select"
+        class="form-select"
         required
       >
         <option v-for="card in cards" :value="card.value" :key="card.value">
@@ -14,9 +14,12 @@
         </option>
       </select>
     </div>
-    <div class="card-image p-3">
-      <img :src="image.src" :alt="image.alt" :title="image.title" />
-    </div>
+    <img
+      class="img-fluid py-3"
+      :src="image.src"
+      :alt="image.alt"
+      :title="image.title"
+    />
   </div>
 </template>
 
@@ -99,3 +102,16 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+// Scale down the cards to at most 50% of the screen width
+// when height > width, and 25% when width > height.
+// This helps ensure that cards can be visible on the screen
+// without (too much) scrolling.
+.card-responsive {
+  max-width: 50vw;
+  @media (orientation: landscape) {
+    max-width: 25vw;
+  }
+}
+</style>
