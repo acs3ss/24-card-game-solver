@@ -69,29 +69,23 @@ export default defineComponent({
     return {
       cards,
       selected: this.value,
-      image: this.getImage(this.value),
     };
   },
   watch: {
     selected(newValue) {
-      this.image = this.getImage(newValue);
       this.$emit("select", newValue);
     },
     value(newValue) {
       this.selected = newValue;
     },
-    colorScheme() {
-      this.image = this.getImage(this.value);
-    },
   },
-  methods: {
-    // TODO: Can this be computed instead?
-    getImage(value: number): Image {
+  computed: {
+    image(): Image {
       const face = faces[Math.floor(Math.random() * 4)];
       return {
-        src: `images/${this.colorScheme}/${value}${face[0]}.svg`,
-        alt: `${cards[value - 1].text} of ${face}`,
-        title: `${cards[value - 1].text} of ${face}`,
+        src: `images/${this.colorScheme}/${this.selected}${face[0]}.svg`,
+        alt: `${cards[this.selected - 1].text} of ${face}`,
+        title: `${cards[this.selected - 1].text} of ${face}`,
       };
     },
   },
