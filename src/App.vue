@@ -1,6 +1,16 @@
 <template>
   <hand @handUpdated="updateHand" :hand="hand" :colorScheme="colorScheme" />
   <solutions @redraw="redraw" :solutions="solutions" />
+  <footer class="text-center mt-auto mb-3">
+    <small>
+      By
+      <a href="https://www.linkedin.com/in/austin-sullivan">Austin Sullivan</a>
+      and
+      <a href="https://www.linkedin.com/in/winston-liu">Winston Liu</a>
+      on
+      <a href="https://www.github.com/acs3ss/24-card-game-solver">GitHub</a>
+    </small>
+  </footer>
 </template>
 
 <script lang="ts">

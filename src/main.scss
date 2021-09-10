@@ -21,6 +21,10 @@
     }
 }
 
+a {
+    text-decoration: none;
+}
+
 .btn:disabled {
     pointer-events: auto;
     cursor: not-allowed;

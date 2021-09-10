@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-around">
+  <div class="row justify-content-around my-3">
     <card-picker
       v-for="id in [1, 2, 3, 4]"
       :id="id"
