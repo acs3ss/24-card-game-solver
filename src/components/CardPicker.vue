@@ -1,12 +1,12 @@
 <template>
-  <div class="col-auto mx-3">
+  <div class="col-auto card-responsive">
     <div class="card-select">
       <label :for="`card${id}`" class="form-label">Card {{ id }}</label>
       <select
         :name="`card${id}`"
         :id="`card${id}`"
         v-model="selected"
-        class="card-picker form-select"
+        class="form-select"
         required
       >
         <option v-for="card in cards" :value="card.value" :key="card.value">
@@ -14,9 +14,12 @@
         </option>
       </select>
     </div>
-    <div class="card-image p-3">
-      <img :src="image.src" :alt="image.alt" :title="image.title" />
-    </div>
+    <img
+      class="img-fluid py-3"
+      :src="image.src"
+      :alt="image.alt"
+      :title="image.title"
+    />
   </div>
 </template>
 
@@ -66,29 +69,23 @@ export default defineComponent({
     return {
       cards,
       selected: this.value,
-      image: this.getImage(this.value),
     };
   },
   watch: {
     selected(newValue) {
-      this.image = this.getImage(newValue);
       this.$emit("select", newValue);
     },
     value(newValue) {
       this.selected = newValue;
     },
-    colorScheme() {
-      this.image = this.getImage(this.value);
-    },
   },
-  methods: {
-    // TODO: Can this be computed instead?
-    getImage(value: number): Image {
+  computed: {
+    image(): Image {
       const face = faces[Math.floor(Math.random() * 4)];
       return {
-        src: `images/${this.colorScheme}/${value}${face[0]}.svg`,
-        alt: `${cards[value - 1].text} of ${face}`,
-        title: `${cards[value - 1].text} of ${face}`,
+        src: `images/${this.colorScheme}/${this.selected}${face[0]}.svg`,
+        alt: `${cards[this.selected - 1].text} of ${face}`,
+        title: `${cards[this.selected - 1].text} of ${face}`,
       };
     },
   },
@@ -99,3 +96,16 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+// Scale down the cards to at most 50% of the screen width
+// when height > width, and 25% when width > height.
+// This helps ensure that cards can be visible on the screen
+// without (too much) scrolling.
+.card-responsive {
+  max-width: 50vw;
+  @media (orientation: landscape) {
+    max-width: 25vw;
+  }
+}
+</style>

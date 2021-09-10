@@ -1,9 +1,9 @@
 <template>
   <div class="my-3">
     <div class="text-center">
-      <p class="fs-1 fw-light">
+      <h1 class="fw-light">
         {{ hasSolutions ? "Solutions found!" : "No solutions" }}
-      </p>
+      </h1>
       <button
         class="btn btn-primary mx-1"
         :disabled="!hasSolutions"
