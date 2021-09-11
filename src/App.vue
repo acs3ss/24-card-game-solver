@@ -1,6 +1,6 @@
 <template>
-  <hand @handUpdated="updateHand" :hand="hand" :colorScheme="colorScheme" />
-  <solutions @redraw="redraw" :solutions="solutions" />
+  <hand :hand="hand" :color-scheme="colorScheme" @handUpdated="updateHand" />
+  <solutions :solutions="solutions" @redraw="redraw" />
   <footer class="text-center mt-auto mb-3">
     <small>
       By
@@ -38,6 +38,23 @@ export default defineComponent({
       colorScheme,
     };
   },
+  watch: {
+    hand: {
+      handler(newValue) {
+        this.solutions = this.solve(newValue);
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    // Query for dark, so that if prefers-color-scheme isn't supported
+    // we fall back to light
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        this.colorScheme = event.matches ? "dark" : "light";
+      });
+  },
   methods: {
     generateHand() {
       return [
@@ -59,23 +76,6 @@ export default defineComponent({
     getRandomValue() {
       return 1 + Math.floor(Math.random() * 13);
     },
-  },
-  watch: {
-    hand: {
-      handler(newValue) {
-        this.solutions = this.solve(newValue);
-      },
-      deep: true,
-    },
-  },
-  mounted() {
-    // Query for dark, so that if prefers-color-scheme isn't supported
-    // we fall back to light
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        this.colorScheme = event.matches ? "dark" : "light";
-      });
   },
 });
 </script>

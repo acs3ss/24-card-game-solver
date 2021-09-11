@@ -5,7 +5,7 @@
       :id="id"
       :key="id"
       :value="hand[id - 1]"
-      :colorScheme="colorScheme"
+      :color-scheme="colorScheme"
       @select="updateHand(id - 1, $event)"
     />
   </div>

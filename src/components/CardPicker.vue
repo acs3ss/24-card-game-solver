@@ -3,13 +3,13 @@
     <div class="card-select">
       <label :for="`card${id}`" class="form-label">Card {{ id }}</label>
       <select
-        :name="`card${id}`"
         :id="`card${id}`"
         v-model="selected"
+        :name="`card${id}`"
         class="form-select"
         required
       >
-        <option v-for="card in cards" :value="card.value" :key="card.value">
+        <option v-for="card in cards" :key="card.value" :value="card.value">
           {{ card.text }}
         </option>
       </select>
@@ -65,19 +65,16 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: {
+    select(selected: number) {
+      return selected >= 1 && selected <= 13;
+    },
+  },
   data() {
     return {
       cards,
       selected: this.value,
     };
-  },
-  watch: {
-    selected(newValue) {
-      this.$emit("select", newValue);
-    },
-    value(newValue) {
-      this.selected = newValue;
-    },
   },
   computed: {
     image(): Image {
@@ -89,9 +86,12 @@ export default defineComponent({
       };
     },
   },
-  emits: {
-    select(selected: number) {
-      return selected >= 1 && selected <= 13;
+  watch: {
+    selected(newValue) {
+      this.$emit("select", newValue);
+    },
+    value(newValue) {
+      this.selected = newValue;
     },
   },
 });
