@@ -108,4 +108,10 @@ export default defineComponent({
     max-width: 25vw;
   }
 }
+
+// Taken directly from the SVGs to reduce content shifts when loading
+img {
+  width: 2.5in;
+  height: 3.5in;
+}
 </style>
