@@ -1,15 +1,17 @@
-name: CI
+name: Deploy to GitHub Pages
 on:
-  push:
+  workflow_run:
+    workflows:
+      - CI
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+    types:
+      - completed
 
 jobs:
-  ci:
+  deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
 
@@ -21,10 +23,10 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: npm run lint
-        run: npm run lint
-        env:
-          NODE_ENV: production
-
       - name: npm run build
         run: npm run build
+
+      - uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist
