@@ -36,18 +36,13 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: {
+    redraw: null,
+  },
   data() {
     return {
       showSolutions: false,
     };
-  },
-  methods: {
-    toggleSolutions() {
-      this.showSolutions = !this.showSolutions;
-    },
-  },
-  emits: {
-    redraw: null,
   },
   computed: {
     hasSolutions() {
@@ -57,6 +52,11 @@ export default defineComponent({
   watch: {
     solutions() {
       this.showSolutions = false;
+    },
+  },
+  methods: {
+    toggleSolutions() {
+      this.showSolutions = !this.showSolutions;
     },
   },
 });
