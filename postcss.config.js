@@ -12,11 +12,25 @@ module.exports = {
             /<style[^]+?<\/style>/gi,
             ""
           );
-          return (
-            contentWithoutStyleBlocks.match(
-              /[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g
-            ) || []
-          );
+
+          const classes =
+            Array.from(
+              contentWithoutStyleBlocks.matchAll(/class="([^"]+?)"/g)
+            ).map(match => match[1]);
+          const styles = classes
+            .map(styles => styles.split(" ")).flat();
+
+          const ids =
+            Array.from(
+              contentWithoutStyleBlocks.matchAll(/id="([^"]+?)"/g)
+            ).map(match => match[1]);
+
+          const tags =
+            Array.from(
+              contentWithoutStyleBlocks.matchAll(/<(\w[\w-]*?)[^\w-]/g)
+            ).map(match => match[1]);
+
+          return styles.concat(ids).concat(tags);
         },
         safelist: [
           /-(leave|enter|appear)(|-(to|from|active))$/,
