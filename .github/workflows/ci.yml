@@ -1,17 +1,52 @@
 name: CI
 on:
-- push
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
     steps:
       - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          cache: npm
 
       - name: npm ci
         run: npm ci
 
+      - name: npm run lint
+        run: npm run lint
+
       - name: npm run build
         run: npm run build
+
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: ci
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Download dist folder
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - uses: JamesIves/github-pages-deploy-action@4.1.4
+          with:
+            branch: gh-pages
+            folder: dist
