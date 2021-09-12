@@ -1,7 +1,7 @@
-import * as Vue from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import "./light.scss";
 import "./dark.scss";
 
-const app = Vue.createApp(App);
+const app = createApp(App);
 app.mount("#app");
