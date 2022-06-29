@@ -28,11 +28,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, type PropType } from "vue";
 export default defineComponent({
   props: {
     solutions: {
-      type: Array,
+      type: Array as PropType<Array<string>>,
       required: true,
     },
   },
