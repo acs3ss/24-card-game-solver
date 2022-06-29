@@ -1,5 +1,5 @@
 <template>
-  <hand :hand="hand" :color-scheme="colorScheme" @handUpdated="updateHand" />
+  <hand :hand="hand" :color-scheme="colorScheme" @hand-updated="updateHand" />
   <solutions :solutions="solutions" @redraw="redraw" />
   <footer class="text-center mt-auto mb-3">
     <small>
@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Hand, { Card } from "./components/Hand.vue";
+import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
 import { Solver } from "./solver";
 

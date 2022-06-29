@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, type PropType } from "vue";
 import CardPicker from "./CardPicker.vue";
 
 export interface Card {
@@ -26,7 +26,7 @@ export default defineComponent({
   },
   props: {
     hand: {
-      type: Array,
+      type: Array as PropType<Array<number>>,
       required: true,
     },
     colorScheme: {
