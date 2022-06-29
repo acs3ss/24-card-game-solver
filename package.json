@@ -15,7 +15,7 @@
   "dependencies": {
     "bootstrap": "^5.1.0",
     "js-combinatorics": "^1.5.3",
-    "vue": "^3.0.0"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
