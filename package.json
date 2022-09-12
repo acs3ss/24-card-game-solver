@@ -15,7 +15,7 @@
   "dependencies": {
     "bootstrap": "^5.2.0",
     "js-combinatorics": "^2.1.1",
-    "vue": "^3.2.38"
+    "vue": "^3.2.39"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",
