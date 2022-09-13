@@ -24,7 +24,7 @@
     "@fullhuman/vue-cli-plugin-purgecss": "~4.1.0",
     "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.1",
+    "@typescript-eslint/parser": "^5.37.0",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "~5.0.8",
