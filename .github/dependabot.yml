@@ -11,3 +11,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      # @typescript-eslnt publishes new updates every Monday:
+      # https://typescript-eslint.io/maintenance/releases#latest
+      # Since we use multiple packages that need to be kept in sync with each other,
+      # check for updates on Tuesday instead to avoid mismatched versions.
+      # Remove after https://github.com/dependabot/dependabot-core/issues/1296 is implemented.
+      day: "tuesday"
