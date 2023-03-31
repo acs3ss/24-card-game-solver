@@ -4,5 +4,9 @@
   "compilerOptions": {
     // For Jest & js-combinatorics
     "allowJs": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ]
 }
