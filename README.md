@@ -15,8 +15,8 @@ Two game modes:
 ## Web development
 
 1. `npm install`
-1. `npm run serve`
-1. Open http://localhost:8080
+1. `npm run dev`
+1. Open http://localhost:5173
 
 ## Acknowledgements
 
