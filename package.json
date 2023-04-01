@@ -4,6 +4,8 @@
   "private": true,
   "description": "24 solver",
   "author": "Austin Sullivan",
+  "main": "./dist/main.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,7 +14,6 @@
     "lint": "eslint --max-warnings 0",
     "format": "eslint --fix"
   },
-  "main": "./dist/main.js",
   "dependencies": {
     "bootstrap": "^5.2.3",
     "js-combinatorics": "^2.1.1",
