@@ -6,8 +6,8 @@
     <meta name="description" content="24 card game solver">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" href="favicon.ico">
     <title>24 Solver</title>
   </head>
   <body class="container-fluid">
@@ -16,6 +16,7 @@
     </noscript>
     <div id="app" class="d-flex flex-fill flex-column vh-100"></div>
 
+    <script type="module" src="/src/main.ts"></script>
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('serviceworker.js');
