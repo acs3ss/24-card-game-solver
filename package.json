@@ -11,8 +11,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "test:unit": "jest",
-    "lint": "eslint --max-warnings 0",
-    "format": "eslint --fix"
+    "lint": "eslint . --max-warnings 0",
+    "format": "eslint . --fix"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
