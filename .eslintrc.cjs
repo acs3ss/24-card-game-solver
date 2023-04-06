@@ -1,4 +1,6 @@
-export default {
+// ESLint does not support ESM yet in its config files.
+// Revisit when https://github.com/eslint/eslint/issues/13481 is relased.
+module.exports = {
   root: true,
   env: {
     node: true,
@@ -18,6 +20,7 @@ export default {
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "vue/multi-word-component-names": "off",
   },
+  ignorePatterns: ["dist/**"],
   overrides: [
     {
       files: [
