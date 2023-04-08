@@ -19,10 +19,10 @@ self.addEventListener("install", (event) => {
       for (const theme of ["light", "dark"]) {
         for (let i = 1; i <= 13; i++) {
           images.push(
-            `/images/${theme}/${i}C.svg`,
-            `/images/${theme}/${i}D.svg`,
-            `/images/${theme}/${i}H.svg`,
-            `/images/${theme}/${i}S.svg`
+            `/assets/images/${theme}/${i}C.svg`,
+            `/assets/images/${theme}/${i}D.svg`,
+            `/assets/images/${theme}/${i}H.svg`,
+            `/assets/images/${theme}/${i}S.svg`
           );
         }
       }
