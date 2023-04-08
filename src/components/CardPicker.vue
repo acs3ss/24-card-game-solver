@@ -80,7 +80,11 @@ export default defineComponent({
     image(): Image {
       const face = faces[Math.floor(Math.random() * 4)];
       return {
-        src: `images/${this.colorScheme}/${this.selected}${face[0]}.svg`,
+        // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
+        src: new URL(
+          `../images/${this.colorScheme}/${this.selected}${face[0]}.svg`,
+          import.meta.url
+        ).href,
         alt: `${cards[this.selected - 1].text} of ${face}`,
         title: `${cards[this.selected - 1].text} of ${face}`,
       };
