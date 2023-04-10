@@ -11,10 +11,12 @@
       <a href="https://www.github.com/acs3ss/24-card-game-solver">GitHub</a>
     </small>
   </footer>
+  <reload-prompt />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import ReloadPrompt from "./ReloadPrompt.vue";
 import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
 import { Solver } from "./solver";
@@ -23,6 +25,7 @@ export default defineComponent({
   components: {
     Hand,
     Solutions,
+    ReloadPrompt,
   },
   data() {
     const hand = this.generateHand();

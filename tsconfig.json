@@ -3,8 +3,13 @@
   "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
     // For Jest & js-combinatorics
-    "allowJs": true
-  },
+    "allowJs": true,
+    "types": [
+      "jest",
+      // For vite-plugin-pwa virtual imports
+      "vite-plugin-pwa/client"
+    ]
+},
   "include": [
     "src/**/*",
     "tests/**/*"
