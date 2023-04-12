@@ -23,8 +23,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed, reactive, ref, watchEffect } from "vue";
 
 interface Image {
   src: string;
@@ -32,7 +32,7 @@ interface Image {
   title: string;
 }
 
-const cards = [
+const cards = reactive([
   { text: "Ace", value: 1 },
   { text: "2", value: 2 },
   { text: "3", value: 3 },
@@ -46,59 +46,36 @@ const cards = [
   { text: "Jack", value: 11 },
   { text: "Queen", value: 12 },
   { text: "King", value: 13 },
-];
+]);
 
 const faces = ["Clubs", "Diamonds", "Hearts", "Spades"];
 
-export default defineComponent({
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    value: {
-      type: Number,
-      required: true,
-    },
-    colorScheme: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: {
-    select(selected: number) {
-      return selected >= 1 && selected <= 13;
-    },
-  },
-  data() {
-    return {
-      cards,
-      selected: this.value,
-    };
-  },
-  computed: {
-    image(): Image {
-      const face = faces[Math.floor(Math.random() * 4)];
-      return {
-        // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
-        src: new URL(
-          `../images/${this.colorScheme}/${this.selected}${face[0]}.svg`,
-          import.meta.url
-        ).href,
-        alt: `${cards[this.selected - 1].text} of ${face}`,
-        title: `${cards[this.selected - 1].text} of ${face}`,
-      };
-    },
-  },
-  watch: {
-    selected(newValue) {
-      this.$emit("select", newValue);
-    },
-    value(newValue) {
-      this.selected = newValue;
-    },
-  },
+const props = defineProps<{
+  id: number;
+  value: number;
+  colorScheme: string;
+}>();
+const selected = ref(props.value);
+
+const emit = defineEmits<{
+  (event: "select", selected: number): void;
+}>();
+
+const image = computed(() => {
+  const face = faces[Math.floor(Math.random() * 4)];
+  return {
+    // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
+    src: new URL(
+      `../images/${props.colorScheme}/${selected.value}${face[0]}.svg`,
+      import.meta.url
+    ).href,
+    alt: `${cards[selected.value - 1].text} of ${face}`,
+    title: `${cards[selected.value - 1].text} of ${face}`,
+  };
 });
+
+watchEffect(() => emit("select", selected.value));
+watchEffect(() => (selected.value = props.value));
 </script>
 
 <style lang="scss" scoped>

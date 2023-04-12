@@ -25,7 +25,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "handUpdated", { id, value }: Card): boolean;
+  (event: "handUpdated", { id, value }: Card): void;
 }>();
 
 const updateHand = (id: number, value: number) => {
