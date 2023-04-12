@@ -14,71 +14,43 @@
   <reload-prompt />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { onMounted, reactive, ref, watchEffect } from "vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
 import { Solver } from "./solver";
 
-export default defineComponent({
-  components: {
-    Hand,
-    Solutions,
-    ReloadPrompt,
-  },
-  data() {
-    const hand = this.generateHand();
-    // Query for dark, so that if prefers-color-scheme isn't supported
-    // we fall back to light
-    const colorScheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-    return {
-      hand,
-      solutions: this.solve(hand),
-      colorScheme,
-    };
-  },
-  watch: {
-    hand: {
-      handler(newValue) {
-        this.solutions = this.solve(newValue);
-      },
-      deep: true,
-    },
-  },
-  mounted() {
-    // Query for dark, so that if prefers-color-scheme isn't supported
-    // we fall back to light
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        this.colorScheme = event.matches ? "dark" : "light";
-      });
-  },
-  methods: {
-    generateHand() {
-      return [
-        this.getRandomValue(),
-        this.getRandomValue(),
-        this.getRandomValue(),
-        this.getRandomValue(),
-      ];
-    },
-    solve(hand: number[]) {
-      return Solver.print(Solver.solve(hand));
-    },
-    updateHand({ id, value }: Card) {
-      this.hand[id] = value;
-    },
-    redraw() {
-      this.hand = this.generateHand();
-    },
-    getRandomValue() {
-      return 1 + Math.floor(Math.random() * 13);
-    },
-  },
-});
+// Query for dark, so that if prefers-color-scheme isn't supported
+// we fall back to light
+const colorScheme = ref(
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+);
+onMounted(() =>
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      colorScheme.value = event.matches ? "dark" : "light";
+    })
+);
+
+const getRandomValue = () => 1 + Math.floor(Math.random() * 13);
+
+const generateHand = () => {
+  return [
+    getRandomValue(),
+    getRandomValue(),
+    getRandomValue(),
+    getRandomValue(),
+  ];
+};
+const solve = (hand: number[]) => Solver.print(Solver.solve(hand));
+
+let hand = reactive(generateHand());
+let solutions = reactive(solve(hand));
+watchEffect(() => (solutions = solve(hand)));
+
+const updateHand = ({ id, value }: Card) => (hand[id] = value);
+
+const redraw = () => (hand = generateHand());
 </script>
