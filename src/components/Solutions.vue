@@ -44,7 +44,10 @@ defineEmits<{
 const hasSolutions = computed(() => props.solutions.length !== 0);
 const toggleSolutions = () => (showSolutions.value = !showSolutions.value);
 
-watch(props.solutions, () => (showSolutions.value = false));
+watch(
+  () => props.solutions,
+  () => (showSolutions.value = false)
+);
 </script>
 
 <style lang="scss" scoped>

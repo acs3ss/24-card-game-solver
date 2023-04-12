@@ -57,11 +57,14 @@ const props = defineProps<{
 }>();
 const selected = ref(props.value);
 
+// Can't be computed because it's the target of a v-model.
+watchEffect(() => (selected.value = props.value));
+
 const emit = defineEmits<{
   (event: "select", selected: number): void;
 }>();
 
-const image = computed(() => {
+const image = computed((): Image => {
   const face = faces[Math.floor(Math.random() * 4)];
   return {
     // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
@@ -75,7 +78,6 @@ const image = computed(() => {
 });
 
 watchEffect(() => emit("select", selected.value));
-watchEffect(() => (selected.value = props.value));
 </script>
 
 <style lang="scss" scoped>

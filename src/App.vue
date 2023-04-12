@@ -1,6 +1,6 @@
 <template>
-  <hand :hand="hand" :color-scheme="colorScheme" @hand-updated="updateHand" />
-  <solutions :solutions="solutions" @redraw="redraw" />
+  <Hand :hand="hand" :color-scheme="colorScheme" @hand-updated="updateHand" />
+  <Solutions :solutions="solutions" @redraw="redraw" />
   <footer class="text-center mt-auto mb-3">
     <small>
       By
@@ -11,11 +11,11 @@
       <a href="https://www.github.com/acs3ss/24-card-game-solver">GitHub</a>
     </small>
   </footer>
-  <reload-prompt />
+  <ReloadPrompt />
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watchEffect } from "vue";
+import { computed, onMounted, ref } from "vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
@@ -46,11 +46,11 @@ const generateHand = () => {
 };
 const solve = (hand: number[]) => Solver.print(Solver.solve(hand));
 
-let hand = reactive(generateHand());
-let solutions = reactive(solve(hand));
-watchEffect(() => (solutions = solve(hand)));
+// Arrays must use ref because we're replacing them
+const hand = ref(generateHand());
+const solutions = computed(() => solve(hand.value));
 
-const updateHand = ({ id, value }: Card) => (hand[id] = value);
+const updateHand = ({ id, value }: Card) => (hand.value[id] = value);
 
-const redraw = () => (hand = generateHand());
+const redraw = () => (hand.value = generateHand());
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-around my-3">
-    <card-picker
+    <CardPicker
       v-for="id in 4"
       :id="id"
       :key="id"
