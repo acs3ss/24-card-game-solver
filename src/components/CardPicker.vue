@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed } from "vue";
 
 interface Image {
   src: string;
@@ -32,7 +32,7 @@ interface Image {
   title: string;
 }
 
-const cards = reactive([
+const cards = [
   { text: "Ace", value: 1 },
   { text: "2", value: 2 },
   { text: "3", value: 3 },
@@ -46,7 +46,7 @@ const cards = reactive([
   { text: "Jack", value: 11 },
   { text: "Queen", value: 12 },
   { text: "King", value: 13 },
-]);
+];
 
 const faces = ["Clubs", "Diamonds", "Hearts", "Spades"];
 
