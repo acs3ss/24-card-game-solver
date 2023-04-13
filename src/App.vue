@@ -52,10 +52,5 @@ const solutions = computed(() => solve(hand.value));
 
 const updateHand = ({ id, value }: Card) => (hand.value[id] = value);
 
-const redraw = () => {
-  // Not sure why, but hand.value = generateHand() doesn't trigger an update
-  for (let i = 0; i < hand.value.length; i++) {
-    hand.value[i] = getRandomValue();
-  }
-};
+const redraw = () => (hand.value = generateHand());
 </script>

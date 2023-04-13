@@ -30,9 +30,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 
-// Hide solutions until the button is clicked.
-const showSolutions = ref(false);
-
 const props = defineProps<{
   solutions: string[];
 }>();
@@ -42,8 +39,12 @@ defineEmits<{
 }>();
 
 const hasSolutions = computed(() => props.solutions.length !== 0);
+
+// Hide solutions until the button is clicked.
+const showSolutions = ref(false);
 const toggleSolutions = () => (showSolutions.value = !showSolutions.value);
 
+// Re-hide solutions if the cards change.
 watch(
   () => props.solutions,
   () => (showSolutions.value = false)

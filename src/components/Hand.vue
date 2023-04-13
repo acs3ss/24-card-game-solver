@@ -28,7 +28,6 @@ const emit = defineEmits<{
   (event: "handUpdated", { id, value }: Card): void;
 }>();
 
-const updateHand = (id: number, value: number) => {
+const updateHand = (id: number, value: number) =>
   emit("handUpdated", { id, value });
-};
 </script>

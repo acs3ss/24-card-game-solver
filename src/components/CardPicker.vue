@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watchEffect } from "vue";
+import { computed, reactive } from "vue";
 
 interface Image {
   src: string;
@@ -55,17 +55,19 @@ const props = defineProps<{
   value: number;
   colorScheme: string;
 }>();
-const selected = ref(props.value);
-
-// Can't be computed because it's the target of a v-model.
-watchEffect(() => (selected.value = props.value));
 
 const emit = defineEmits<{
   (event: "select", selected: number): void;
 }>();
 
+// Use selected as a "proxy" since props.value is readonly
+const selected = computed({
+  get: () => props.value,
+  set: (newValue) => emit("select", newValue),
+});
+
 const image = computed((): Image => {
-  const face = faces[Math.floor(Math.random() * 4)];
+  const face = faces[Math.floor(Math.random() * faces.length)];
   return {
     // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
     src: new URL(
@@ -76,8 +78,6 @@ const image = computed((): Image => {
     title: `${cards[selected.value - 1].text} of ${face}`,
   };
 });
-
-watchEffect(() => emit("select", selected.value));
 </script>
 
 <style lang="scss" scoped>
