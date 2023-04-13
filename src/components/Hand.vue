@@ -1,18 +1,17 @@
 <template>
   <div class="row justify-content-around my-3">
-    <card-picker
-      v-for="id in [1, 2, 3, 4]"
-      :id="id"
-      :key="id"
-      :value="hand[id - 1]"
+    <CardPicker
+      v-for="(card, index) in hand"
+      :id="index"
+      :key="index"
+      :value="card"
       :color-scheme="colorScheme"
-      @select="updateHand(id - 1, $event)"
+      @select="updateHand(index, $event)"
     />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
+<script setup lang="ts">
 import CardPicker from "./CardPicker.vue";
 
 export interface Card {
@@ -20,29 +19,15 @@ export interface Card {
   value: number;
 }
 
-export default defineComponent({
-  components: {
-    CardPicker,
-  },
-  props: {
-    hand: {
-      type: Array as PropType<Array<number>>,
-      required: true,
-    },
-    colorScheme: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: {
-    handUpdated({ id, value }: Card) {
-      return id >= 0 && id < 4 && value >= 1 && value <= 13;
-    },
-  },
-  methods: {
-    updateHand(id: number, value: number) {
-      this.$emit("handUpdated", { id, value });
-    },
-  },
-});
+defineProps<{
+  hand: number[];
+  colorScheme: string;
+}>();
+
+const emit = defineEmits<{
+  (event: "handUpdated", { id, value }: Card): void;
+}>();
+
+const updateHand = (id: number, value: number) =>
+  emit("handUpdated", { id, value });
 </script>

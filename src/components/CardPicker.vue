@@ -1,7 +1,7 @@
 <template>
   <div class="col-auto card-responsive">
     <div class="card-select">
-      <label :for="`card${id}`" class="form-label">Card {{ id }}</label>
+      <label :for="`card${id}`" class="form-label">Card {{ id + 1 }}</label>
       <select
         :id="`card${id}`"
         v-model="selected"
@@ -23,8 +23,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 
 interface Image {
   src: string;
@@ -50,54 +50,33 @@ const cards = [
 
 const faces = ["Clubs", "Diamonds", "Hearts", "Spades"];
 
-export default defineComponent({
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    value: {
-      type: Number,
-      required: true,
-    },
-    colorScheme: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: {
-    select(selected: number) {
-      return selected >= 1 && selected <= 13;
-    },
-  },
-  data() {
-    return {
-      cards,
-      selected: this.value,
-    };
-  },
-  computed: {
-    image(): Image {
-      const face = faces[Math.floor(Math.random() * 4)];
-      return {
-        // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
-        src: new URL(
-          `../images/${this.colorScheme}/${this.selected}${face[0]}.svg`,
-          import.meta.url
-        ).href,
-        alt: `${cards[this.selected - 1].text} of ${face}`,
-        title: `${cards[this.selected - 1].text} of ${face}`,
-      };
-    },
-  },
-  watch: {
-    selected(newValue) {
-      this.$emit("select", newValue);
-    },
-    value(newValue) {
-      this.selected = newValue;
-    },
-  },
+const props = defineProps<{
+  id: number;
+  value: number;
+  colorScheme: string;
+}>();
+
+const emit = defineEmits<{
+  (event: "select", selected: number): void;
+}>();
+
+// Use selected as a "proxy" since props.value is readonly
+const selected = computed({
+  get: () => props.value,
+  set: (newValue) => emit("select", newValue),
+});
+
+const image = computed((): Image => {
+  const face = faces[Math.floor(Math.random() * faces.length)];
+  return {
+    // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
+    src: new URL(
+      `../images/${props.colorScheme}/${selected.value}${face[0]}.svg`,
+      import.meta.url
+    ).href,
+    alt: `${cards[selected.value - 1].text} of ${face}`,
+    title: `${cards[selected.value - 1].text} of ${face}`,
+  };
 });
 </script>
 
