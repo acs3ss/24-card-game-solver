@@ -1,12 +1,12 @@
 <template>
   <div class="row justify-content-around my-3">
     <CardPicker
-      v-for="id in 4"
-      :id="id"
-      :key="id"
-      :value="hand[id - 1]"
+      v-for="(card, index) in hand"
+      :id="index"
+      :key="index"
+      :value="card"
       :color-scheme="colorScheme"
-      @select="updateHand(id - 1, $event)"
+      @select="updateHand(index, $event)"
     />
   </div>
 </template>

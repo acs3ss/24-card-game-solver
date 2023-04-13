@@ -1,7 +1,7 @@
 <template>
   <div class="col-auto card-responsive">
     <div class="card-select">
-      <label :for="`card${id}`" class="form-label">Card {{ id }}</label>
+      <label :for="`card${id}`" class="form-label">Card {{ id + 1 }}</label>
       <select
         :id="`card${id}`"
         v-model="selected"
