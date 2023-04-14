@@ -1,0 +1,50 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "npm: dev",
+            "type": "npm",
+            "script": "dev",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "npm: build:watch",
+            "type": "npm",
+            "script": "build:watch",
+            "isBackground": true,
+            "problemMatcher": {
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^([^:]+?):(\\d+):(\\d+):\\s+(ERROR|WARNING):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                },
+                "background": {
+                    "beginsPattern": "build started...",
+                    "endsPattern": "files generated"
+                }
+            }
+        },
+        {
+            "label": "npm: serve",
+            "type": "npm",
+            "script": "serve",
+            "isBackground": true
+        },
+        {
+            "label": "Live production preview",
+            "dependsOn": [
+                "npm: build:watch",
+                "npm: serve"
+            ]
+        }
+    ]
+}
