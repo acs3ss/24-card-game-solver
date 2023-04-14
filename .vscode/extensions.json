@@ -4,5 +4,6 @@
         "ms-edgedevtools.vscode-edge-devtools",
         "vue.volar",
         "vue.vscode-typescript-vue-plugin",
+        "zixuanchen.vitest-explorer"
     ]
 }
