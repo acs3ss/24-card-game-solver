@@ -7,6 +7,10 @@ describe("Solutions", () => {
     solutions: ["8 * 1 + 2 * 8", "2 * 8 + 8 * 1", "log_2(8) * 8 * 1"],
   };
 
+  const solutionsRegex = new RegExp(
+    props.solutions.join("|").replace(/[*+()]/g, "\\$&")
+  );
+
   afterEach(() => {
     cleanup();
   });
@@ -14,10 +18,7 @@ describe("Solutions", () => {
   test("Hides solutions by default", () => {
     render(Solutions, { props });
 
-    const regex = new RegExp(
-      props.solutions.join("|").replace(/[*+()]/g, "\\$&")
-    );
-    expect(screen.queryAllByText(regex)).to.be.empty;
+    expect(screen.queryAllByText(solutionsRegex)).to.be.empty;
 
     screen.getByRole("button", {
       name: "Show solutions",
@@ -27,21 +28,19 @@ describe("Solutions", () => {
   test("Toggles solutions when button is clicked", async () => {
     render(Solutions, { props });
 
-    const regex = new RegExp(
-      props.solutions.join("|").replace(/[*+()]/g, "\\$&")
-    );
-
     const showSolutionsButton = screen.getByRole("button", {
       name: "Show solutions",
     });
     await fireEvent.click(showSolutionsButton);
-    expect(screen.getAllByText(regex)).toHaveLength(props.solutions.length);
+    expect(screen.getAllByText(solutionsRegex)).toHaveLength(
+      props.solutions.length
+    );
 
     const hideSolutionsButton = screen.getByRole("button", {
       name: "Hide solutions",
     });
     await fireEvent.click(hideSolutionsButton);
-    expect(screen.queryAllByText(regex)).to.be.empty;
+    expect(screen.queryAllByText(solutionsRegex)).to.be.empty;
   });
 
   test("Hides solutions when they change", async () => {
@@ -60,10 +59,7 @@ describe("Solutions", () => {
       name: "Show solutions",
     });
 
-    const regex = new RegExp(
-      props.solutions.join("|").replace(/[*+()]/g, "\\$&")
-    );
-    expect(screen.queryAllByText(regex)).to.be.empty;
+    expect(screen.queryAllByText(solutionsRegex)).to.be.empty;
   });
 
   test("Disables showing solutions when none exist", () => {
