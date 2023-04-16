@@ -34,8 +34,6 @@ jobs:
 
       - name: npm run test
         run: npm run test
-        env:
-          DEBUG: pw:webserver
 
       - name: Upload Playright report
         uses: actions/upload-artifact@v3
