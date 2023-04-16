@@ -29,5 +29,16 @@ jobs:
       - name: npm run build
         run: npm run build
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
       - name: npm run test
         run: npm run test
+
+      - name: Upload Playright report
+        uses: actions/upload-artifact@v3
+        if: always() # Even on failure
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
