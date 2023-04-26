@@ -4,7 +4,7 @@ on:
     workflows:
       - CI
     branches:
-      - master
+      - main
     types:
       - completed
 
