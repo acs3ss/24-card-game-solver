@@ -57,7 +57,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "select", selected: number): void;
+  select: [selected: number];
 }>();
 
 // Use selected as a "proxy" since props.value is readonly

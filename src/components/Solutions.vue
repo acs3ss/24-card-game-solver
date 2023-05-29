@@ -35,7 +35,7 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
-  (event: "redraw"): void;
+  redraw: [];
 }>();
 
 const hasSolutions = computed(() => props.solutions.length !== 0);
