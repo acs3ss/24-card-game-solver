@@ -22,7 +22,7 @@
     "format": "eslint . --fix"
   },
   "dependencies": {
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^5.3.0-alpha3",
     "js-combinatorics": "^2.1.1",
     "vue": "^3.3.4"
   },
