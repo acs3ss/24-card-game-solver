@@ -2,10 +2,8 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     :class="`card ${props.suit}`"
-    height="3.5in"
     preserveAspectRatio="none"
     viewBox="-120 -168 240 336"
-    width="2.5in"
   >
     <title>
       {{ props.rank[0].toUpperCase() + props.rank.slice(1) }}
@@ -1030,8 +1028,7 @@ const ranks = {
 </script>
 
 <style scoped lang="scss">
-// Taken directly from the SVGs to reduce content shifts when loading
-svg {
+.card {
   width: 2.5in;
   height: 3.5in;
 }
