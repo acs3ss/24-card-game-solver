@@ -14,23 +14,13 @@
         </option>
       </select>
     </div>
-    <img
-      class="img-fluid py-3"
-      :src="image.src"
-      :alt="image.alt"
-      :title="image.title"
-    />
+    <Card :id="id" :rank="rank" :suit="getRandomSuit()" class="my-3" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-
-interface Image {
-  src: string;
-  alt: string;
-  title: string;
-}
+import Card from "./Card.vue";
 
 const cards = [
   { text: "Ace", value: 1 },
@@ -46,9 +36,9 @@ const cards = [
   { text: "Jack", value: 11 },
   { text: "Queen", value: 12 },
   { text: "King", value: 13 },
-];
+] as const;
 
-const faces = ["Clubs", "Diamonds", "Hearts", "Spades"];
+const faces = ["clubs", "diamonds", "hearts", "spades"] as const;
 
 const props = defineProps<{
   id: number;
@@ -66,18 +56,14 @@ const selected = computed({
   set: (newValue) => emit("select", newValue),
 });
 
-const image = computed((): Image => {
-  const face = faces[Math.floor(Math.random() * faces.length)];
-  return {
-    // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
-    src: new URL(
-      `../images/${props.colorScheme}/${selected.value}${face[0]}.svg`,
-      import.meta.url
-    ).href,
-    alt: `${cards[selected.value - 1].text} of ${face}`,
-    title: `${cards[selected.value - 1].text} of ${face}`,
-  };
-});
+const rank = computed(
+  () =>
+    cards[selected.value - 1].text.toLowerCase() as Lowercase<
+      (typeof cards)[number]["text"]
+    >
+);
+
+const getRandomSuit = () => faces[Math.floor(Math.random() * faces.length)];
 </script>
 
 <style lang="scss" scoped>
@@ -90,11 +76,5 @@ const image = computed((): Image => {
   @media (orientation: landscape) {
     max-width: 25vw;
   }
-}
-
-// Taken directly from the SVGs to reduce content shifts when loading
-img {
-  width: 2.5in;
-  height: 3.5in;
 }
 </style>

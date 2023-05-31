@@ -26,6 +26,8 @@ $toast-background-color: $body-bg; // No opacity
 
 @import "bootstrap/scss/utilities/api";
 
+$color-mode-type: media-query;
+
 @media (prefers-reduced-motion: no-preference) {
     body {
         $duration: 0.5s;
@@ -42,4 +44,67 @@ a {
 .btn:disabled {
     pointer-events: auto;
     cursor: not-allowed;
+}
+
+.card-background {
+    fill: white;
+    stroke: black;
+}
+
+.rank {
+    stroke-width: 80;
+    stroke-linecap: square;
+    stroke-miterlimit: 1.5;
+    fill: none;
+}
+
+.card {
+    &.clubs, &.spades {
+        .suit {
+            fill: black;
+        }
+
+        .rank {
+            stroke: black;
+        }
+    }
+
+    &.hearts, &.diamonds {
+        .suit {
+            fill: red;
+        }
+
+        .rank {
+            stroke: red;
+        }
+    }
+}
+
+@include color-mode(dark) {
+    .card-background {
+        fill: #343a40;
+        stroke: black;
+    }
+
+    .card {
+        &.clubs, &.spades {
+            .suit {
+                fill: #f8f9fa;
+            }
+
+            .rank {
+                stroke: #f8f9fa;
+            }
+        }
+
+        &.hearts, &.diamonds {
+            .suit {
+                fill: #e35d6a;
+            }
+
+            .rank {
+                stroke: #e35d6a;
+            }
+        }
+    }
 }
