@@ -23,7 +23,8 @@ $color-mode-type: media-query;
 
 @import "bootstrap/scss/utilities/api";
 
-
+// Everything in this file is relevant, so exclude it from purging
+/* purgecss start ignore */
 @media (prefers-reduced-motion: no-preference) {
     body {
         $duration: 0.5s;
@@ -104,3 +105,4 @@ a {
         }
     }
 }
+/* purgecss end ignore */
