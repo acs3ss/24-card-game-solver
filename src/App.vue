@@ -1,5 +1,5 @@
 <template>
-  <Hand :hand="hand" :color-scheme="colorScheme" @hand-updated="updateHand" />
+  <Hand :hand="hand" @hand-updated="updateHand" />
   <Solutions :solutions="solutions" @redraw="redraw" />
   <footer class="text-center mt-auto mb-3">
     <small>
@@ -15,24 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
 import { Solver } from "./solver";
-
-// Query for dark, so that if prefers-color-scheme isn't supported
-// we fall back to light
-const colorScheme = ref(
-  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-);
-onMounted(() =>
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (event) => {
-      colorScheme.value = event.matches ? "dark" : "light";
-    })
-);
 
 const getRandomValue = () => 1 + Math.floor(Math.random() * 13);
 

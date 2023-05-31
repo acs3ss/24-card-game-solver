@@ -43,7 +43,6 @@ const faces = ["clubs", "diamonds", "hearts", "spades"] as const;
 const props = defineProps<{
   id: number;
   value: number;
-  colorScheme: string;
 }>();
 
 const emit = defineEmits<{

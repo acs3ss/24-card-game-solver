@@ -5,7 +5,6 @@
       :id="index"
       :key="index"
       :value="card"
-      :color-scheme="colorScheme"
       @select="updateHand(index, $event)"
     />
   </div>
@@ -21,7 +20,6 @@ export interface Card {
 
 defineProps<{
   hand: number[];
-  colorScheme: string;
 }>();
 
 const emit = defineEmits<{
