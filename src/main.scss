@@ -1,12 +1,16 @@
+// https://getbootstrap.com/docs/5.3/customize/sass/#importing
+@import "bootstrap/scss/functions";
+
+$color-mode-type: media-query;
+
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
 
 @import "bootstrap/scss/maps";
-
 @import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
-
 @import "bootstrap/scss/root";
+
+@import "bootstrap/scss/utilities";
 @import "bootstrap/scss/reboot";
 @import "bootstrap/scss/images";
 @import "bootstrap/scss/containers";
@@ -14,19 +18,11 @@
 @import "bootstrap/scss/buttons";
 @import "bootstrap/scss/close";
 @import "bootstrap/scss/forms";
-
-// These are taken from Bootstrap@5.3 which isn't released yet
-$toast-header-background-color: $body-bg;
-$toast-header-border-color: $border-color-translucent;
-$toast-header-color: rgba($body-color, .75);
-$toast-background-color: $body-bg; // No opacity
 @import "bootstrap/scss/toasts";
-
 @import "bootstrap/scss/helpers/position";
 
 @import "bootstrap/scss/utilities/api";
 
-$color-mode-type: media-query;
 
 @media (prefers-reduced-motion: no-preference) {
     body {
@@ -82,28 +78,28 @@ a {
 
 @include color-mode(dark) {
     .card-background {
-        fill: #343a40;
+        fill: $gray-800;
         stroke: black;
     }
 
     .card {
         &.clubs, &.spades {
             .suit {
-                fill: #f8f9fa;
+                fill: $gray-100;
             }
 
             .rank {
-                stroke: #f8f9fa;
+                stroke: $gray-100;
             }
         }
 
         &.hearts, &.diamonds {
             .suit {
-                fill: #e35d6a;
+                fill: $red-400;
             }
 
             .rank {
-                stroke: #e35d6a;
+                stroke: $red-400;
             }
         }
     }
