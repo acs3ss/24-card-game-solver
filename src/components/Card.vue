@@ -1033,4 +1033,11 @@ const ranks = {
   width: 2.5in;
   height: 3.5in;
 }
+
+.rank {
+  stroke-width: 80;
+  stroke-linecap: square;
+  stroke-miterlimit: 1.5;
+  fill: none;
+}
 </style>
