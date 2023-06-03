@@ -7,7 +7,7 @@
     viewBox="-120 -168 240 336"
   >
     <title>
-      {{ props.rank[0].toUpperCase() + props.rank.slice(1) }}
+      {{ getRankText(rank) }}
       of
       {{ props.suit[0].toUpperCase() + props.suit.slice(1) }}
     </title>
@@ -16,7 +16,7 @@
       viewBox="-500 -500 1000 1000"
       preserveAspectRatio="xMinYMid"
     >
-      <path :d="ranks[props.rank].path" class="rank"></path>
+      <path :d="ranks[props.rank]" class="rank"></path>
     </symbol>
     <symbol
       :id="`suit-${id}`"
@@ -25,7 +25,7 @@
     >
       <path :d="suits[props.suit]" class="suit"></path>
     </symbol>
-    <template v-if="ranks[props.rank].value > 10">
+    <template v-if="props.rank > 10">
       <rect
         :id="`face-background-${id}`"
         width="164.8"
@@ -40,7 +40,7 @@
         preserveAspectRatio="none"
         viewBox="0 0 1300 2000"
       >
-        <template v-if="props.rank === 'jack'">
+        <template v-if="props.rank === 11">
           <template v-if="props.suit === 'clubs'">
             <path
               fill="#FC4"
@@ -302,7 +302,7 @@
             ></use>
           </template>
         </template>
-        <template v-else-if="props.rank === 'queen'">
+        <template v-else-if="props.rank === 12">
           <template v-if="props.suit === 'clubs'">
             <path
               fill="#FC4"
@@ -537,7 +537,7 @@
             ></use>
           </template>
         </template>
-        <template v-else-if="props.rank === 'king'">
+        <template v-else-if="props.rank === 13">
           <template v-if="props.suit === 'clubs'">
             <path
               fill="#FC4"
@@ -832,12 +832,11 @@
       x="-111.784"
       y="-119"
     ></use>
-    <template v-if="ranks[props.rank].value <= 10">
+    <template v-if="props.rank <= 10">
       <use
-        v-for="index in ranks[props.rank].value < 6 ||
-        ranks[props.rank].value > 8
-          ? Math.ceil(ranks[props.rank].value / 2)
-          : Math.ceil(ranks[props.rank].value / 2) + 1"
+        v-for="index in props.rank < 6 || props.rank > 8
+          ? Math.ceil(props.rank / 2)
+          : Math.ceil(props.rank / 2) + 1"
         :key="index"
         :href="`#suit-${id}`"
         height="70"
@@ -845,10 +844,9 @@
         :y="getY(index, false)"
       ></use>
       <use
-        v-for="index in ranks[props.rank].value < 6 ||
-        ranks[props.rank].value > 8
-          ? Math.floor(ranks[props.rank].value / 2)
-          : Math.floor(ranks[props.rank].value / 2) - 1"
+        v-for="index in props.rank < 6 || props.rank > 8
+          ? Math.floor(props.rank / 2)
+          : Math.floor(props.rank / 2) - 1"
         :key="index"
         transform="rotate(180)"
         :href="`#suit-${id}`"
@@ -881,37 +879,49 @@
 <script setup lang="ts">
 const props = defineProps<{
   id: number;
-  rank: keyof typeof ranks;
+  rank: number;
   suit: keyof typeof suits;
 }>();
 
+const getRankText = (rank: number): string => {
+  if (rank === 1) {
+    return "Ace";
+  } else if (rank <= 10) {
+    return rank.toString();
+  } else if (rank === 11) {
+    return "Jack";
+  } else if (rank === 12) {
+    return "Queen";
+  } else {
+    return "King";
+  }
+};
+
 const getX = (index: number, rotated: boolean): number => {
-  if (ranks[props.rank].value < 4) {
+  if (props.rank < 4) {
     return -35;
   }
 
   if (
-    ranks[props.rank].value % 2 !== 0 &&
-    ((ranks[props.rank].value !== 7 &&
-      index === Math.ceil(ranks[props.rank].value / 2)) ||
-      (ranks[props.rank].value === 7 &&
-        index === Math.ceil(ranks[props.rank].value / 2) + 1))
+    props.rank % 2 !== 0 &&
+    ((props.rank !== 7 && index === Math.ceil(props.rank / 2)) ||
+      (props.rank === 7 && index === Math.ceil(props.rank / 2) + 1))
   ) {
     return -35;
   }
 
   if (
-    ranks[props.rank].value === 8 &&
-    ((!rotated && index === Math.ceil(ranks[props.rank].value / 2) + 1) ||
-      (rotated && index === Math.floor(ranks[props.rank].value / 2) - 1))
+    props.rank === 8 &&
+    ((!rotated && index === Math.ceil(props.rank / 2) + 1) ||
+      (rotated && index === Math.floor(props.rank / 2) - 1))
   ) {
     return -35;
   }
 
   if (
-    ranks[props.rank].value === 10 &&
-    ((!rotated && index === Math.ceil(ranks[props.rank].value / 2)) ||
-      (rotated && index === Math.floor(ranks[props.rank].value / 2)))
+    props.rank === 10 &&
+    ((!rotated && index === Math.ceil(props.rank / 2)) ||
+      (rotated && index === Math.floor(props.rank / 2)))
   ) {
     return -35;
   }
@@ -921,17 +931,15 @@ const getX = (index: number, rotated: boolean): number => {
 
 const getY = (index: number, rotated: boolean): number => {
   if (
-    ranks[props.rank].value % 2 !== 0 &&
-    ((ranks[props.rank].value !== 7 &&
-      index === Math.ceil(ranks[props.rank].value / 2)) ||
-      (ranks[props.rank].value === 7 &&
-        index === Math.ceil(ranks[props.rank].value / 2) + 1))
+    props.rank % 2 !== 0 &&
+    ((props.rank !== 7 && index === Math.ceil(props.rank / 2)) ||
+      (props.rank === 7 && index === Math.ceil(props.rank / 2) + 1))
   ) {
-    if (ranks[props.rank].value === 7) {
+    if (props.rank === 7) {
       return -85.294;
     }
 
-    if (ranks[props.rank].value === 9) {
+    if (props.rank === 9) {
       return -42;
     }
 
@@ -939,22 +947,22 @@ const getY = (index: number, rotated: boolean): number => {
   }
 
   if (
-    ranks[props.rank].value === 8 &&
-    ((!rotated && index === Math.ceil(ranks[props.rank].value / 2) + 1) ||
-      (rotated && index === Math.floor(ranks[props.rank].value / 2) - 1))
+    props.rank === 8 &&
+    ((!rotated && index === Math.ceil(props.rank / 2) + 1) ||
+      (rotated && index === Math.floor(props.rank / 2) - 1))
   ) {
     return -85.294;
   }
 
   if (
-    ranks[props.rank].value === 10 &&
-    ((!rotated && index === Math.ceil(ranks[props.rank].value / 2)) ||
-      (rotated && index === Math.floor(ranks[props.rank].value / 2)))
+    props.rank === 10 &&
+    ((!rotated && index === Math.ceil(props.rank / 2)) ||
+      (rotated && index === Math.floor(props.rank / 2)))
   ) {
     return -102.058;
   }
 
-  if (ranks[props.rank].value < 9) {
+  if (props.rank < 9) {
     return index < 3 ? -135.588 : -35;
   }
 
@@ -972,60 +980,22 @@ const suits = {
     "M0 -500C100 -250 355 -100 355 185A150 150 0 0 1 55 185A10 10 0 0 0 35 185C35 385 85 400 130 500L-130 500C-85 400 -35 385 -35 185A10 10 0 0 0 -55 185A150 150 0 0 1 -355 185C-355 -100 -100 -250 0 -500Z",
 };
 
-const ranks = {
-  ace: {
-    value: 1,
-    path: "M-270 460L-110 460M-200 450L0 -460L200 450M110 460L270 460M-120 130L120 130",
-  },
-  "2": {
-    value: 2,
-    path: "M-225 -225C-245 -265 -200 -460 0 -460C 200 -460 225 -325 225 -225C225 -25 -225 160 -225 460L225 460L225 300",
-  },
-  "3": {
-    value: 3,
-    path: "M-250 -320L-250 -460L200 -460L-110 -80C-100 -90 -50 -120 0 -120C200 -120 250 0 250 150C250 350 170 460 -30 460C-230 460 -260 300 -260 300",
-  },
-  "4": {
-    value: 4,
-    path: "M50 460L250 460M150 460L150 -460L-300 175L-300 200L270 200",
-  },
-  "5": {
-    value: 5,
-    path: "M170 -460L-175 -460L-210 -115C-210 -115 -200 -200 0 -200C100 -200 255 -80 255 120C255 320 180 460 -20 460C-220 460 -255 285 -255 285",
-  },
-  "6": {
-    value: 6,
-    path: "M-250 100A250 250 0 0 1 250 100L250 210A250 250 0 0 1 -250 210L-250 -210A250 250 0 0 1 0 -460C150 -460 180 -400 200 -375",
-  },
-  "7": {
-    value: 7,
-    path: "M-265 -320L-265 -460L265 -460C135 -200 -90 100 -90 460",
-  },
-  "8": {
-    value: 8,
-    path: "M-1 -50A205 205 0 1 1 1 -50L-1 -50A255 255 0 1 0 1 -50Z",
-  },
-  "9": {
-    value: 9,
-    path: "M250 -100A250 250 0 0 1 -250 -100L-250 -210A250 250 0 0 1 250 -210L250 210A250 250 0 0 1 0 460C-150 460 -180 400 -200 375",
-  },
-  "10": {
-    value: 10,
-    path: "M-260 430L-260 -430M-50 0L-50 -310A150 150 0 0 1 250 -310L250 310A150 150 0 0 1 -50 310Z",
-  },
-  jack: {
-    value: 11,
-    path: "M50 -460L250 -460M150 -460L150 250A100 100 0 0 1 -250 250L-250 220",
-  },
-  queen: {
-    value: 12,
-    path: "M-260 100C40 100 -40 460 260 460M-175 0L-175 -285A175 175 0 0 1 175 -285L175 285A175 175 0 0 1 -175 285Z",
-  },
-  king: {
-    value: 13,
-    path: "M-285 -460L-85 -460M-185 -460L-185 460M-285 460L-85 460M85 -460L285 -460M185 -440L-170 155M85 460L285 460M185 440L-10 -70",
-  },
-};
+const ranks = [
+  "", // No-op for 0
+  "M-270 460L-110 460M-200 450L0 -460L200 450M110 460L270 460M-120 130L120 130",
+  "M-225 -225C-245 -265 -200 -460 0 -460C 200 -460 225 -325 225 -225C225 -25 -225 160 -225 460L225 460L225 300",
+  "M-250 -320L-250 -460L200 -460L-110 -80C-100 -90 -50 -120 0 -120C200 -120 250 0 250 150C250 350 170 460 -30 460C-230 460 -260 300 -260 300",
+  "M50 460L250 460M150 460L150 -460L-300 175L-300 200L270 200",
+  "M170 -460L-175 -460L-210 -115C-210 -115 -200 -200 0 -200C100 -200 255 -80 255 120C255 320 180 460 -20 460C-220 460 -255 285 -255 285",
+  "M-250 100A250 250 0 0 1 250 100L250 210A250 250 0 0 1 -250 210L-250 -210A250 250 0 0 1 0 -460C150 -460 180 -400 200 -375",
+  "M-265 -320L-265 -460L265 -460C135 -200 -90 100 -90 460",
+  "M-1 -50A205 205 0 1 1 1 -50L-1 -50A255 255 0 1 0 1 -50Z",
+  "M250 -100A250 250 0 0 1 -250 -100L-250 -210A250 250 0 0 1 250 -210L250 210A250 250 0 0 1 0 460C-150 460 -180 400 -200 375",
+  "M-260 430L-260 -430M-50 0L-50 -310A150 150 0 0 1 250 -310L250 310A150 150 0 0 1 -50 310Z",
+  "M50 -460L250 -460M150 -460L150 250A100 100 0 0 1 -250 250L-250 220",
+  "M-260 100C40 100 -40 460 260 460M-175 0L-175 -285A175 175 0 0 1 175 -285L175 285A175 175 0 0 1 -175 285Z",
+  "M-285 -460L-85 -460M-185 -460L-185 460M-285 460L-85 460M85 -460L285 -460M185 -440L-170 155M85 460L285 460M185 440L-10 -70",
+];
 </script>
 
 <style scoped lang="scss">
