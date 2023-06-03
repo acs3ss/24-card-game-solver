@@ -1,10 +1,10 @@
 <template>
   <div class="row justify-content-around my-3">
     <CardPicker
-      v-for="(card, index) in hand"
+      v-for="(value, index) in hand"
       :id="index"
       :key="index"
-      :value="card"
+      :value="value"
       @select="updateHand(index, $event)"
     />
   </div>

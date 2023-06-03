@@ -9,12 +9,17 @@
         class="form-select"
         required
       >
-        <option v-for="card in cards" :key="card.value" :value="card.value">
-          {{ card.text }}
+        <option v-for="(rank, index) in ranks" :key="index" :value="index">
+          {{ rank[0].toUpperCase() + rank.slice(1) }}
         </option>
       </select>
     </div>
-    <Card :id="id" :rank="rank" :suit="getRandomSuit()" class="my-3" />
+    <Card
+      :id="id"
+      :rank="ranks[selected - 1]"
+      :suit="getRandomSuit()"
+      class="my-3"
+    />
   </div>
 </template>
 
@@ -22,23 +27,23 @@
 import { computed } from "vue";
 import Card from "./Card.vue";
 
-const cards = [
-  { text: "Ace", value: 1 },
-  { text: "2", value: 2 },
-  { text: "3", value: 3 },
-  { text: "4", value: 4 },
-  { text: "5", value: 5 },
-  { text: "6", value: 6 },
-  { text: "7", value: 7 },
-  { text: "8", value: 8 },
-  { text: "9", value: 9 },
-  { text: "10", value: 10 },
-  { text: "Jack", value: 11 },
-  { text: "Queen", value: 12 },
-  { text: "King", value: 13 },
+const ranks = [
+  "ace",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "jack",
+  "queen",
+  "king",
 ] as const;
 
-const faces = ["clubs", "diamonds", "hearts", "spades"] as const;
+const suits = ["clubs", "diamonds", "hearts", "spades"] as const;
 
 const props = defineProps<{
   id: number;
@@ -55,14 +60,7 @@ const selected = computed({
   set: (newValue) => emit("select", newValue),
 });
 
-const rank = computed(
-  () =>
-    cards[selected.value - 1].text.toLowerCase() as Lowercase<
-      (typeof cards)[number]["text"]
-    >
-);
-
-const getRandomSuit = () => faces[Math.floor(Math.random() * faces.length)];
+const getRandomSuit = () => suits[Math.floor(Math.random() * suits.length)];
 </script>
 
 <style lang="scss" scoped>
