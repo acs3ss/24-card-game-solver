@@ -14,7 +14,7 @@
         </option>
       </select>
     </div>
-    <Card :id="id" :rank="selected" :suit="getRandomSuit()" class="my-3" />
+    <Card :id="id" :rank="selected + 1" :suit="getRandomSuit()" class="my-3" />
   </div>
 </template>
 
