@@ -5,6 +5,7 @@
     :class="`card ${props.suit}`"
     preserveAspectRatio="none"
     viewBox="-120 -168 240 336"
+    data-testid="card"
   >
     <title>
       {{ getRankText(rank) }}
