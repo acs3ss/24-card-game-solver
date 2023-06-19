@@ -9,22 +9,21 @@ test("Has title", async ({ page }) => {
 test("Renders four random cards", async ({ page }) => {
   await page.goto("/");
 
-  const cards = await page.getByTitle(" of ", { exact: false }).all();
-  expect(cards).toHaveLength(4);
-  const imageSrcs = await Promise.all(
-    cards.map((card) => card.getAttribute("src"))
-  );
-  expect(new Set(imageSrcs).size).toBeGreaterThanOrEqual(2);
+  const titles = await page
+    .getByTestId("card")
+    .getByText(" of ")
+    .allTextContents();
+  expect(titles).toHaveLength(4);
+  expect(new Set(titles).size).toBeGreaterThanOrEqual(2);
 
   await page.goto("/");
 
-  const newCards = await page.getByTitle(" of ", { exact: false }).all();
-  expect(newCards).toHaveLength(4);
-  const newImageSrcs = await Promise.all(
-    newCards.map((card) => card.getAttribute("src"))
-  );
-  for (let i = 0; i < imageSrcs.length; i++) {
-    if (imageSrcs[i] !== newImageSrcs[i]) {
+  const newTitles = await page
+    .getByTestId("card")
+    .getByText(" of ")
+    .allTextContents();
+  for (let i = 0; i < 4; i++) {
+    if (titles[i] !== newTitles[i]) {
       return;
     }
   }
@@ -35,34 +34,41 @@ test("Renders four random cards", async ({ page }) => {
 test("Updates card when asked", async ({ page }) => {
   await page.goto("/");
 
-  const cards = await page.getByTitle(" of ", { exact: false }).all();
-  const imageSrc = await cards[0].getAttribute("src");
+  const title = await page
+    .getByTestId("card")
+    .getByText(" of ")
+    .first()
+    .textContent();
 
   const select = page.getByLabel("Card 1");
   const currentValue = await select.inputValue();
   await select.selectOption({ value: `${(Number(currentValue) + 1) % 13}` });
 
-  const newCards = await page.getByTitle(" of ", { exact: false }).all();
-  expect(await newCards[0].getAttribute("src")).not.toStrictEqual(imageSrc);
+  const newTitle = await page
+    .getByTestId("card")
+    .getByText(" of ")
+    .first()
+    .textContent();
+  expect(newTitle).not.toStrictEqual(title);
 });
 
 test("Redraws hand when asked", async ({ page }) => {
   await page.goto("/");
 
-  const cards = await page.getByTitle(" of ", { exact: false }).all();
-  const imageSrcs = await Promise.all(
-    cards.map((card) => card.getAttribute("src"))
-  );
+  const titles = await page
+    .getByTestId("card")
+    .getByText(" of ")
+    .allTextContents();
 
   const button = page.getByRole("button", { name: "Draw again" });
   await button.click();
 
-  const newCards = await page.getByTitle(" of ", { exact: false }).all();
-  const newImageSrcs = await Promise.all(
-    newCards.map((card) => card.getAttribute("src"))
-  );
-  for (let i = 0; i < imageSrcs.length; i++) {
-    if (imageSrcs[i] !== newImageSrcs[i]) {
+  const newTitles = await page
+    .getByTestId("card")
+    .getByText(" of ")
+    .allTextContents();
+  for (let i = 0; i < 4; i++) {
+    if (titles[i] !== newTitles[i]) {
       return;
     }
   }
@@ -86,7 +92,7 @@ test("Displays solutions for the current hand", async ({ page }) => {
     "No solutions after 5 tries"
   );
 
-  const selects = await page.getByLabel("Card ", { exact: false }).all();
+  const selects = await page.getByLabel("Card ").all();
   const values = (
     await Promise.all(selects.map((select) => select.inputValue()))
   ).map((value) => Number(value));
@@ -128,8 +134,7 @@ test("Updates solutions after hand changes", async ({ page }) => {
   );
 
   await button.click();
-  const solution = page.locator("pre").first();
-  const text = await solution.innerText();
+  const solution = await page.locator("pre").first().textContent();
 
   for (let i = 0; i < 5; i++) {
     const redrawButton = page.getByRole("button", { name: "Draw again" });
@@ -141,9 +146,8 @@ test("Updates solutions after hand changes", async ({ page }) => {
     }
     await button.click();
 
-    const newSolution = page.locator("pre").first();
-    const newText = await newSolution.innerText();
-    if (text !== newText) {
+    const newSolution = await page.locator("pre").first().textContent();
+    if (solution !== newSolution) {
       return;
     }
   }

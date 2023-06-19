@@ -9,12 +9,12 @@
         class="form-select"
         required
       >
-        <option v-for="(rank, index) in ranks" :key="index" :value="index">
+        <option v-for="(rank, index) in ranks" :key="index" :value="index + 1">
           {{ rank[0].toUpperCase() + rank.slice(1) }}
         </option>
       </select>
     </div>
-    <Card :id="id" :rank="selected + 1" :suit="getRandomSuit()" class="my-3" />
+    <Card :id="id" :rank="selected" :suit="getRandomSuit()" class="my-3" />
   </div>
 </template>
 
