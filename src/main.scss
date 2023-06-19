@@ -33,6 +33,13 @@ $color-mode-type: media-query;
         transition: color $duration $timing, background-color $duration $timing;
     }
 
+    .form-select {
+        // Interestingly, adding color here makes that transition twice as long.
+        // Maybe because it's already specified in the body transition?
+        // But then why doesn't it also happen to background-color?
+        transition: background-color $duration $timing, border-color $duration $timing;
+    }
+
     .card * {
         transition: fill $duration $timing, stroke $duration $timing;
     }
