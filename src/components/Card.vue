@@ -2,7 +2,7 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    :class="`card ${props.suit}`"
+    :class="['card', props.suit]"
     preserveAspectRatio="none"
     viewBox="-120 -168 240 336"
     data-testid="card"
@@ -1001,8 +1001,9 @@ const ranks = [
 
 <style scoped lang="scss">
 .card {
-  width: 2.5in;
-  height: 3.5in;
+  // Scale with the parent container
+  // https://stackoverflow.com/q/19484707/5661593
+  width: 100%;
 }
 
 .rank {
