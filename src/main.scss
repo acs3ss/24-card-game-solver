@@ -34,9 +34,8 @@ $color-mode-type: media-query;
     }
 
     .form-select {
-        // Interestingly, adding color here makes that transition twice as long.
-        // Maybe because it's already specified in the body transition?
-        // But then why doesn't it also happen to background-color?
+        // Interestingly, `color` doesn't seem to transition until everything else finishes.
+        // That makes it stand out much more than if we don't transition it.
         transition: background-color $duration $timing, border-color $duration $timing;
     }
 
@@ -72,12 +71,38 @@ a {
 
     &.hearts, &.diamonds {
         .suit {
-            fill: red;
+            fill: $red;
         }
 
         .rank {
-            stroke: red;
+            stroke: $red;
         }
+    }
+
+    .face-background {
+        fill: var(--bs-body-bg);
+        stroke: $blue;
+    }
+
+    .face-accent-gold {
+        fill: $yellow;
+    }
+
+    .face-accent-red {
+        fill: $red;
+    }
+
+    .face-accent-blue {
+        fill: $blue;
+    }
+
+    .face-accent-black {
+        fill: var(--bs-body-color);
+        // fill: black;
+    }
+
+    .face-stroke {
+        stroke: $blue;
     }
 }
 
@@ -95,6 +120,33 @@ a {
             .rank {
                 stroke: $red-400;
             }
+        }
+
+        .face-background {
+            // fill: var(--bs-body-bg);
+            fill: var(--bs-body-color);
+            stroke: $blue-400;
+        }
+
+        .face-accent-gold {
+            fill: $yellow-400;
+        }
+
+        .face-accent-red {
+            fill: $red-400;
+        }
+
+        .face-accent-blue {
+            fill: $blue-400;
+        }
+
+        .face-accent-black {
+            // fill: var(--bs-body-color);
+            fill: var(--bs-body-bg);
+        }
+
+        .face-stroke {
+            stroke: $blue-400;
         }
     }
 }
