@@ -55,18 +55,18 @@ a {
 }
 
 .card-background {
-    fill: white;
-    stroke: black;
+    fill: var(--bs-body-bg);
+    stroke: var(--bs-body-color);
 }
 
 .card {
     &.clubs, &.spades {
         .suit {
-            fill: black;
+            fill: var(--bs-body-color);
         }
 
         .rank {
-            stroke: black;
+            stroke: var(--bs-body-color);
         }
     }
 
@@ -82,22 +82,11 @@ a {
 }
 
 @include color-mode(dark) {
-    .card-background {
-        fill: $gray-800;
-        stroke: black;
+    :root {
+        --bs-body-color: var(--bs-gray-100);
     }
 
     .card {
-        &.clubs, &.spades {
-            .suit {
-                fill: $gray-100;
-            }
-
-            .rank {
-                stroke: $gray-100;
-            }
-        }
-
         &.hearts, &.diamonds {
             .suit {
                 fill: $red-400;
