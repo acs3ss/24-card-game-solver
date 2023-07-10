@@ -123,30 +123,33 @@ a {
         }
 
         .face-background {
-            // fill: var(--bs-body-bg);
-            fill: var(--bs-body-color);
-            stroke: $blue-400;
+            fill: var(--bs-body-bg);
+            // fill: var(--bs-body-color);
+            // stroke: $blue-400;
+            stroke: var(--bs-body-color);
         }
 
-        .face-accent-gold {
-            fill: $yellow-400;
-        }
+        // .face-accent-gold {
+        //     fill: $yellow-400;
+        // }
 
         .face-accent-red {
             fill: $red-400;
         }
 
         .face-accent-blue {
-            fill: $blue-400;
+            // fill: $blue-400;
+            fill: var(--bs-body-color);
         }
 
         .face-accent-black {
-            // fill: var(--bs-body-color);
-            fill: var(--bs-body-bg);
+            fill: var(--bs-body-color);
+            // fill: var(--bs-body-bg);
         }
 
         .face-stroke {
-            stroke: $blue-400;
+            // stroke: $blue-400;
+            stroke: var(--bs-body-color);
         }
     }
 }
