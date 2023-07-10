@@ -96,6 +96,10 @@ a {
         fill: $blue;
     }
 
+    .face-eyes {
+        fill: $blue;
+    }
+
     .face-accent-black {
         fill: var(--bs-body-color);
         // fill: black;
@@ -138,7 +142,11 @@ a {
         }
 
         .face-accent-blue {
-            // fill: $blue-400;
+            fill: $blue-400;
+            // fill: var(--bs-body-color);
+        }
+
+        .face-eyes {
             fill: var(--bs-body-color);
         }
 
