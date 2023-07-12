@@ -8,9 +8,9 @@
     data-testid="card"
   >
     <title>
-      {{ getRankText(rank) }}
+      {{ rankText }}
       of
-      {{ props.suit[0].toUpperCase() + props.suit.slice(1) }}
+      {{ suitText }}
     </title>
     <symbol
       :id="`rank-${id}`"
@@ -896,25 +896,31 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 const props = defineProps<{
   id: number;
   rank: number;
   suit: keyof typeof suits;
 }>();
 
-const getRankText = (rank: number): string => {
-  if (rank === 1) {
+const rankText = computed(() => {
+  if (props.rank === 1) {
     return "Ace";
-  } else if (rank <= 10) {
-    return rank.toString();
-  } else if (rank === 11) {
+  } else if (props.rank <= 10) {
+    return props.rank.toString();
+  } else if (props.rank === 11) {
     return "Jack";
-  } else if (rank === 12) {
+  } else if (props.rank === 12) {
     return "Queen";
   } else {
     return "King";
   }
-};
+});
+
+const suitText = computed(
+  () => props.suit[0].toUpperCase() + props.suit.slice(1)
+);
 
 const getX = (index: number, rotated: boolean): number => {
   if (props.rank < 4) {
