@@ -102,7 +102,6 @@ a {
 
     .face-accent-black {
         fill: var(--bs-body-color);
-        // fill: black;
     }
 
     .face-stroke {
@@ -116,15 +115,15 @@ a {
     }
 
     .card {
-        &.hearts, &.diamonds {
-            .suit {
-                fill: $red-400;
-            }
+        // &.hearts, &.diamonds {
+        //     .suit {
+        //         fill: $red-400;
+        //     }
 
-            .rank {
-                stroke: $red-400;
-            }
-        }
+        //     .rank {
+        //         stroke: $red-400;
+        //     }
+        // }
 
         .face-background {
             fill: var(--bs-body-bg);
@@ -133,19 +132,19 @@ a {
             stroke: var(--bs-body-color);
         }
 
-        .face-accent-gold {
-            fill: $yellow-400;
-        }
+        // .face-accent-gold {
+        //     fill: $yellow-400;
+        // }
 
-        .face-accent-red {
-            fill: $red-400;
-        }
+        // .face-accent-red {
+        //     fill: $red-400;
+        // }
 
-        .face-accent-blue {
-            fill: $blue-400;
-            // fill: var(--bs-body-color);
-            // fill: var(--bs-body-bg);
-        }
+        // .face-accent-blue {
+        //     fill: $blue-400;
+        //     // fill: var(--bs-body-color);
+        //     // fill: var(--bs-body-bg);
+        // }
 
         .face-accent-face {
             fill: var(--bs-body-color);

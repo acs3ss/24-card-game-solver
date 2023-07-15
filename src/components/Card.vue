@@ -1032,9 +1032,9 @@ const ranks = [
 
 .face-stroke {
   fill: none;
+  stroke-width: 6;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 6;
 
   &.light {
     stroke-width: 3;
@@ -1042,9 +1042,9 @@ const ranks = [
 }
 
 .rank {
+  fill: none;
   stroke-width: 80;
   stroke-linecap: square;
   stroke-miterlimit: 1.5;
-  fill: none;
 }
 </style>
