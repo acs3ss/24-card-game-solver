@@ -91,8 +91,10 @@ test("Displays solutions for the current hand", async ({ page }) => {
   await button.click();
 
   const solutions = await page.locator("pre").all();
-  for (const solution of solutions) {
-    const text = await solution.innerText();
+  const texts = await Promise.all(
+    solutions.map((solution) => solution.innerText())
+  );
+  for (const text of texts) {
     const numbers = text
       .split(" ")
       .map((part) => part.replace(/log_2\((\d+)\)/, "$1"))
