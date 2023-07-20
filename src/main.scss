@@ -112,6 +112,7 @@ a {
 @include color-mode(dark) {
     :root {
         --bs-body-color: var(--bs-gray-100);
+        --bs-toast-header-color: var(--bs-body-color);
     }
 
     .card {
