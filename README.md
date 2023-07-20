@@ -18,6 +18,16 @@ Two game modes:
 1. `npm run dev`
 1. Open http://localhost:5173
 
+### Service worker development
+
+The service worker is only included in the production build.
+If making changes to the service worker or if you otherwise want to test its functionality,
+you'll need to build for production instead and start a separate local server.
+
+1. `npm run build:watch`
+1. `npm run serve`
+1. Open http://localhost:4173
+
 ## Acknowledgements
 
 Card SVGs from https://www.me.uk/cards/ and lightly modified for better Vue templating.
