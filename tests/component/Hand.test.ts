@@ -5,7 +5,6 @@ import Hand from "../../src/components/Hand.vue";
 describe("Hand", () => {
   const props = {
     hand: [5, 3, 7, 8],
-    colorScheme: "light",
   };
 
   afterEach(() => {

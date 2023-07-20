@@ -6,7 +6,6 @@ describe("CardPicker", () => {
   const props = {
     id: 1,
     value: 3,
-    colorScheme: "light",
   };
 
   afterEach(() => {
@@ -18,25 +17,22 @@ describe("CardPicker", () => {
 
     screen.getByLabelText(`Card ${props.id + 1}`);
 
-    const regex = new RegExp(`${props.value} of`);
-    const image = screen.getByTitle<HTMLImageElement>(regex);
-    expect(screen.getByAltText(regex)).toStrictEqual(image);
+    const combobox = screen.getByRole("combobox", {
+      name: `Card ${props.id + 1}`,
+    });
+    expect(combobox.children).toHaveLength(13);
 
-    expect(image.src).toMatch(
-      new RegExp(`${props.colorScheme}/${props.value}\\w.svg`)
-    );
+    screen.getByTestId("card");
   });
 
-  test("Renders a random face on load", async () => {
+  test("Renders a random card on load", async () => {
     render(CardPicker, { props });
-
-    const regex = new RegExp(`${props.value} of`);
-    const title = screen.getByTitle(regex).title;
+    const card = screen.getByTestId("card");
 
     for (let i = 0; i < 10; i++) {
       cleanup();
       render(CardPicker, { props });
-      if (screen.getByTitle(regex).title !== title) {
+      if (!card.isEqualNode(screen.getByTestId("card"))) {
         return;
       }
     }
@@ -44,7 +40,7 @@ describe("CardPicker", () => {
     expect.fail("Card face did not change after 10 rerenders");
   });
 
-  test("Emits event when new card is selected", async () => {
+  test("Emits event when a new card is selected", async () => {
     const { emitted } = render(CardPicker, { props });
 
     expect(emitted()).to.be.empty;
@@ -56,19 +52,5 @@ describe("CardPicker", () => {
     expect(emitted().select).toBeDefined();
     expect(emitted().select).toHaveLength(1);
     expect(emitted().select[0]).toStrictEqual([newValue]);
-  });
-
-  test("Changes card theme when color scheme is updated", async () => {
-    const { rerender } = render(CardPicker, { props });
-
-    await rerender({
-      ...props,
-      colorScheme: "dark",
-    });
-
-    const regex = new RegExp(`${props.value} of`);
-    const image = screen.getByTitle<HTMLImageElement>(regex);
-
-    expect(image.src).toMatch(new RegExp(`dark/${props.value}\\w.svg`));
   });
 });

@@ -8,7 +8,7 @@
             "name": "Launch Microsoft Edge and open the Edge DevTools",
             "request": "launch",
             "type": "vscode-edge-devtools.debug",
-            "url": "http://localhost:8080"
+            "url": "http://localhost:5173"
         }
     ]
 }

@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
         const classes = Array.from(
           contentWithoutStyleBlocks.matchAll(/class="([^"]+?)"/g)
         ).map((match) => match[1]);
-        const styles = classes.map((styles) => styles.split(" ")).flat();
+        const styles = classes.flatMap((styles) => styles.split(" "));
 
         const ids = Array.from(
           contentWithoutStyleBlocks.matchAll(/id="([^"]+?)"/g)

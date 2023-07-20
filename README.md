@@ -20,6 +20,6 @@ Two game modes:
 
 ## Acknowledgements
 
-Card images from https://www.me.uk/cards/.
+Card SVGs from https://www.me.uk/cards/ and lightly modified for better Vue templating.
 Light cards use default colors.
 Dark cards use #343A40 (gray-800) for the background, #E35D6A (red-400) for the red pips, and #F8F9FA (gray-100) for the black pips.

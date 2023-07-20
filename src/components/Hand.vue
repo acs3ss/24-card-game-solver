@@ -1,11 +1,10 @@
 <template>
-  <div class="row justify-content-around my-3">
+  <div class="row justify-content-around my-3 mx-0">
     <CardPicker
-      v-for="(card, index) in hand"
+      v-for="(value, index) in hand"
       :id="index"
       :key="index"
-      :value="card"
-      :color-scheme="colorScheme"
+      :value="value"
       @select="updateHand(index, $event)"
     />
   </div>
@@ -21,7 +20,6 @@ export interface Card {
 
 defineProps<{
   hand: number[];
-  colorScheme: string;
 }>();
 
 const emit = defineEmits<{
