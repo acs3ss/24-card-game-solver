@@ -27,39 +27,28 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
-export default defineComponent({
-  props: {
-    solutions: {
-      type: Array as PropType<Array<string>>,
-      required: true,
-    },
-  },
-  emits: {
-    redraw: null,
-  },
-  data() {
-    return {
-      showSolutions: false,
-    };
-  },
-  computed: {
-    hasSolutions() {
-      return this.solutions.length !== 0;
-    },
-  },
-  watch: {
-    solutions() {
-      this.showSolutions = false;
-    },
-  },
-  methods: {
-    toggleSolutions() {
-      this.showSolutions = !this.showSolutions;
-    },
-  },
-});
+<script setup lang="ts">
+import { computed, ref, watch } from "vue";
+
+const props = defineProps<{
+  solutions: string[];
+}>();
+
+defineEmits<{
+  redraw: [];
+}>();
+
+const hasSolutions = computed(() => props.solutions.length !== 0);
+
+// Hide solutions until the button is clicked.
+const showSolutions = ref(false);
+const toggleSolutions = () => (showSolutions.value = !showSolutions.value);
+
+// Re-hide solutions if the cards change.
+watch(
+  () => props.solutions,
+  () => (showSolutions.value = false)
+);
 </script>
 
 <style lang="scss" scoped>

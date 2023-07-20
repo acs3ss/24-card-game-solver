@@ -2,6 +2,9 @@
     "recommendations": [
         "dbaeumer.vscode-eslint",
         "ms-edgedevtools.vscode-edge-devtools",
-        "Vue.volar",
+        "vue.volar",
+        "vue.vscode-typescript-vue-plugin",
+        "zixuanchen.vitest-explorer",
+        "ms-playwright.playwright"
     ]
 }

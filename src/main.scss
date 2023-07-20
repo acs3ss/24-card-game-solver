@@ -1,11 +1,16 @@
+// https://getbootstrap.com/docs/5.3/customize/sass/#importing
+@import "bootstrap/scss/functions";
+
+$color-mode-type: media-query;
+
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
 
 @import "bootstrap/scss/maps";
-
 @import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
-
 @import "bootstrap/scss/root";
+
+@import "bootstrap/scss/utilities";
 @import "bootstrap/scss/reboot";
 @import "bootstrap/scss/images";
 @import "bootstrap/scss/containers";
@@ -13,24 +18,29 @@
 @import "bootstrap/scss/buttons";
 @import "bootstrap/scss/close";
 @import "bootstrap/scss/forms";
-
-// These are taken from Bootstrap@5.3 which isn't released yet
-$toast-header-background-color: $body-bg;
-$toast-header-border-color: $border-color-translucent;
-$toast-header-color: rgba($body-color, .75);
-$toast-background-color: $body-bg; // No opacity
 @import "bootstrap/scss/toasts";
-
 @import "bootstrap/scss/helpers/position";
 
 @import "bootstrap/scss/utilities/api";
 
+// Everything in this file is relevant, so exclude it from purging
+/* purgecss start ignore */
 @media (prefers-reduced-motion: no-preference) {
-    body {
-        $duration: 0.5s;
-        $timing: ease-in-out;
+    $duration: 0.5s;
+    $timing: ease-in-out;
 
+    body {
         transition: color $duration $timing, background-color $duration $timing;
+    }
+
+    .form-select {
+        // Interestingly, `color` doesn't seem to transition until everything else finishes.
+        // That makes it stand out much more than if we don't transition it.
+        transition: background-color $duration $timing, border-color $duration $timing;
+    }
+
+    .card * {
+        transition: fill $duration $timing, stroke $duration $timing;
     }
 }
 
@@ -42,3 +52,81 @@ a {
     pointer-events: auto;
     cursor: not-allowed;
 }
+
+.card-background {
+    fill: var(--bs-body-bg);
+    stroke: var(--bs-body-color);
+}
+
+.card {
+    &.clubs, &.spades {
+        .suit {
+            fill: var(--bs-body-color);
+        }
+
+        .rank {
+            stroke: var(--bs-body-color);
+        }
+    }
+
+    &.hearts, &.diamonds {
+        .suit {
+            fill: $red;
+        }
+
+        .rank {
+            stroke: $red;
+        }
+    }
+
+    .face-background {
+        fill: var(--bs-body-bg);
+        stroke: $blue;
+    }
+
+    .face-accent-gold {
+        fill: $yellow;
+    }
+
+    .face-accent-red {
+        fill: $red;
+    }
+
+    .face-accent-blue {
+        fill: $blue;
+    }
+
+    .face-accent-face {
+        fill: $blue;
+    }
+
+    .face-accent-black {
+        fill: var(--bs-body-color);
+    }
+
+    .face-stroke {
+        stroke: $blue;
+    }
+}
+
+@include color-mode(dark) {
+    :root {
+        --bs-body-color: var(--bs-gray-100);
+        --bs-toast-header-color: var(--bs-body-color);
+    }
+
+    .card {
+        .face-background {
+            stroke: var(--bs-body-color);
+        }
+
+        .face-accent-face {
+            fill: var(--bs-body-color);
+        }
+
+        .face-stroke {
+            stroke: var(--bs-body-color);
+        }
+    }
+}
+/* purgecss end ignore */
