@@ -22,11 +22,7 @@ test("Renders four random cards", async ({ page }) => {
     .getByTestId("card")
     .getByText(" of ")
     .allTextContents();
-  for (let i = 0; i < 4; i++) {
-    if (titles[i] !== newTitles[i]) {
-      return;
-    }
-  }
+  expect(newTitles).not.toStrictEqual(titles);
 
   test.fail(true, "No cards were different on the second render");
 });
@@ -67,11 +63,7 @@ test("Redraws hand when asked", async ({ page }) => {
     .getByTestId("card")
     .getByText(" of ")
     .allTextContents();
-  for (let i = 0; i < 4; i++) {
-    if (titles[i] !== newTitles[i]) {
-      return;
-    }
-  }
+  expect(newTitles).not.toStrictEqual(titles);
 
   test.fail(true, "No cards were different after redrawing");
 });
