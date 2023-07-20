@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-around my-3">
+  <div class="row justify-content-around my-3 mx-0">
     <CardPicker
       v-for="(value, index) in hand"
       :id="index"

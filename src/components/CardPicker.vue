@@ -59,13 +59,16 @@ const getRandomSuit = () => suits[Math.floor(Math.random() * suits.length)];
 </script>
 
 <style lang="scss" scoped>
-// Scale down the cards to at most 50% of the screen width
-// when height > width, and 25% when width > height.
-// This helps ensure that cards can be visible on the screen
-// without (too much) scrolling.
+// Scale down the cards to at most 50% of the screen width when height > width,
+// and 25% at >= 972px (skip 3 cards on one row and go straight to all 4).
+// This allows us to still blow up the cards if zoom is requested,
+// because higher zooms mean less width and the queries won't trigger.
 .card-responsive {
-  max-width: 50vw;
-  @media (orientation: landscape) {
+  @media (orientation: portrait) {
+    max-width: 50vw;
+  }
+
+  @media (min-width: 972px) {
     max-width: 25vw;
   }
 }
