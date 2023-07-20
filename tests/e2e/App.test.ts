@@ -23,8 +23,6 @@ test("Renders four random cards", async ({ page }) => {
     .getByText(" of ")
     .allTextContents();
   expect(newTitles).not.toStrictEqual(titles);
-
-  test.fail(true, "No cards were different on the second render");
 });
 
 test("Updates card when asked", async ({ page }) => {
@@ -64,8 +62,6 @@ test("Redraws hand when asked", async ({ page }) => {
     .getByText(" of ")
     .allTextContents();
   expect(newTitles).not.toStrictEqual(titles);
-
-  test.fail(true, "No cards were different after redrawing");
 });
 
 test("Displays solutions for the current hand", async ({ page }) => {
