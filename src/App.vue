@@ -1,6 +1,8 @@
 <template>
-  <Hand :hand="hand" @hand-updated="updateHand" />
-  <Solutions :solutions="solutions" @redraw="redraw" />
+  <main>
+    <Hand :hand="hand" @hand-updated="updateHand" />
+    <Solutions :solutions="solutions" @redraw="redraw" />
+  </main>
   <footer class="text-center mt-auto mb-3">
     <small>
       By

@@ -17,12 +17,14 @@ const { needRefresh, updateServiceWorker } = useRegisterSW({
   <div
     v-if="needRefresh"
     class="toast position-fixed bottom-0 end-0 m-3 rounded show"
-    role="alert"
-    aria-live="assertive"
+    role="dialog"
+    aria-labelledby="toast-title"
+    aria-describedby="toast-description"
+    aria-live="polite"
     aria-atomic="true"
   >
     <div class="toast-header">
-      <strong class="me-auto">Updates available</strong>
+      <strong id="toast-title" class="me-auto">Updates available</strong>
       <button
         type="button"
         class="btn-close"
@@ -31,7 +33,9 @@ const { needRefresh, updateServiceWorker } = useRegisterSW({
       ></button>
     </div>
     <div class="toast-body">
-      <div class="mb-3">Reload to get the latest changes!</div>
+      <div id="toast-description" class="mb-3">
+        Reload to get the latest changes!
+      </div>
       <button
         type="button"
         class="btn btn-primary"
