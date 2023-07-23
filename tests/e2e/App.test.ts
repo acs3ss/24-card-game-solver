@@ -160,7 +160,7 @@ test.describe("Accessibility", () => {
   });
 
   test("Solutions are accessible", async ({ page }, { project }) => {
-    test.slow(project.name === "Mobile Safari", "Slow in mobile Safari");
+    test.skip(project.name === "Mobile Safari", "Times out in mobile Safari");
 
     await page.goto("/");
 
