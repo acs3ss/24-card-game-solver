@@ -159,7 +159,9 @@ test.describe("Accessibility", () => {
     expect(violations.length).toBe(0);
   });
 
-  test("Solutions are accessible", async ({ page }) => {
+  test("Solutions are accessible", async ({ page }, { project }) => {
+    test.slow(project.name === "Mobile Safari", "Slow in mobile Safari");
+
     await page.goto("/");
 
     for (let i = 0; i < 5; i++) {
