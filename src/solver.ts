@@ -80,7 +80,7 @@ export function solve(hand: number[]): Solution[] {
         left = operations[0].operate(solution[1], solution[2]);
         right = operations[1].operate(left, solution[3]);
         answer = operations[2].operate(solution[0], right);
-        if (answer == 24) {
+        if (answer === 24) {
           solutions.push({
             operations,
             parentheses: 3,
