@@ -21,7 +21,7 @@ import { computed, ref } from "vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
-import { Solver } from "./solver";
+import { print, solve } from "./solver";
 
 const getRandomValue = () => 1 + Math.floor(Math.random() * 13);
 
@@ -33,11 +33,10 @@ const generateHand = () => {
     getRandomValue(),
   ];
 };
-const solve = (hand: number[]) => Solver.print(Solver.solve(hand));
 
 // Arrays must use ref because we're replacing them
 const hand = ref(generateHand());
-const solutions = computed(() => solve(hand.value));
+const solutions = computed(() => print(solve(hand.value)));
 
 const updateHand = ({ id, value }: Card) => (hand.value[id] = value);
 
