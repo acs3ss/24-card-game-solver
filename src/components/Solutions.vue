@@ -29,9 +29,10 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import type { Expression } from "../solver";
 
 const props = defineProps<{
-  solutions: string[];
+  solutions: Expression[];
 }>();
 
 defineEmits<{
