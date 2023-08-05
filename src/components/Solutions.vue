@@ -16,19 +16,21 @@
       </button>
     </div>
     <div v-if="showSolutions" class="row my-3">
-      <pre
+      <math
         v-for="(solution, index) in solutions"
         :key="index"
         class="text-center col-12 col-sm-4 col-md-3 col-lg-2"
       >
-        {{ solution }}
-      </pre>
+        <MathExpression :expression="solution" />
+        <!-- {{ solution }} -->
+      </math>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import MathExpression from "./MathExpression.vue";
 import type { Expression } from "../solver";
 
 const props = defineProps<{
