@@ -8,7 +8,7 @@ describe("Solutions", () => {
   };
 
   const solutionsRegex = new RegExp(
-    props.solutions.join("|").replace(/[*+()]/g, "\\$&")
+    props.solutions.join("|").replace(/[*+()]/g, "\\$&"),
   );
 
   afterEach(() => {
@@ -33,7 +33,7 @@ describe("Solutions", () => {
     });
     await fireEvent.click(showSolutionsButton);
     expect(screen.getAllByText(solutionsRegex)).toHaveLength(
-      props.solutions.length
+      props.solutions.length,
     );
 
     const hideSolutionsButton = screen.getByRole("button", {

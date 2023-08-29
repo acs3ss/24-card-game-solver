@@ -47,7 +47,7 @@ const toggleSolutions = () => (showSolutions.value = !showSolutions.value);
 // Re-hide solutions if the cards change.
 watch(
   () => props.solutions,
-  () => (showSolutions.value = false)
+  () => (showSolutions.value = false),
 );
 </script>
 

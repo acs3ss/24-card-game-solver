@@ -919,7 +919,7 @@ const rankText = computed(() => {
 });
 
 const suitText = computed(
-  () => props.suit[0].toUpperCase() + props.suit.slice(1)
+  () => props.suit[0].toUpperCase() + props.suit.slice(1),
 );
 
 const getX = (index: number, rotated: boolean): number => {
