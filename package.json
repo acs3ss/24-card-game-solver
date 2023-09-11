@@ -47,7 +47,7 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-pwa": "^0.16.4",
-    "vitest": "^0.34.3"
+    "vitest": "^0.34.4"
   },
   "bugs": {
     "url": "https://github.com/acs3ss/24-card-game-solver/issues"
