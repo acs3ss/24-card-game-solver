@@ -43,7 +43,7 @@
     "jsdom": "^22.1.0",
     "playwright": "^1.37.1",
     "prettier": "^2.8.8",
-    "sass": "^1.68.0",
+    "sass": "^1.69.3",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-pwa": "^0.16.5",
