@@ -160,7 +160,7 @@ test.describe("Accessibility", () => {
   });
 
   test("Solutions are accessible", async ({ page }, { project }) => {
-    test.skip(
+    test.fail(
       process.env.CI !== undefined && project.name === "Mobile Safari",
       "Times out in mobile Safari on CI",
     );
