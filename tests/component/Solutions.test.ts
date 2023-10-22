@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/vue";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  type MatcherFunction,
+} from "@testing-library/vue";
 import { afterEach, describe, expect, test } from "vitest";
 import Solutions from "../../src/components/Solutions.vue";
 
@@ -7,9 +13,9 @@ describe("Solutions", () => {
     solutions: ["8 * 1 + 2 * 8", "2 * 8 + 8 * 1", "log_2(8) * 8 * 1"],
   };
 
-  const solutionsRegex = new RegExp(
-    props.solutions.join("|").replace(/[*+()]/g, "\\$&"),
-  );
+  const solutionsMatcher: MatcherFunction = (content) => {
+    return props.solutions.includes(content);
+  };
 
   afterEach(() => {
     cleanup();
@@ -18,7 +24,7 @@ describe("Solutions", () => {
   test("Hides solutions by default", () => {
     render(Solutions, { props });
 
-    expect(screen.queryAllByText(solutionsRegex)).to.be.empty;
+    expect(screen.queryAllByText(solutionsMatcher)).to.be.empty;
 
     screen.getByRole("button", {
       name: "Show solutions",
@@ -32,7 +38,7 @@ describe("Solutions", () => {
       name: "Show solutions",
     });
     await fireEvent.click(showSolutionsButton);
-    expect(screen.getAllByText(solutionsRegex)).toHaveLength(
+    expect(screen.getAllByText(solutionsMatcher)).toHaveLength(
       props.solutions.length,
     );
 
@@ -40,7 +46,7 @@ describe("Solutions", () => {
       name: "Hide solutions",
     });
     await fireEvent.click(hideSolutionsButton);
-    expect(screen.queryAllByText(solutionsRegex)).to.be.empty;
+    expect(screen.queryAllByText(solutionsMatcher)).to.be.empty;
   });
 
   test("Hides solutions when they change", async () => {
@@ -59,7 +65,7 @@ describe("Solutions", () => {
       name: "Show solutions",
     });
 
-    expect(screen.queryAllByText(solutionsRegex)).to.be.empty;
+    expect(screen.queryAllByText(solutionsMatcher)).to.be.empty;
   });
 
   test("Disables showing solutions when none exist", () => {
