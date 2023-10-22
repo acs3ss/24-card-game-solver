@@ -8,20 +8,20 @@ if (process.env.NODE_ENV === "production") {
       defaultExtractor(content) {
         const contentWithoutStyleBlocks = content.replace(
           /<style[^]+?<\/style>/gi,
-          ""
+          "",
         );
 
         const classes = Array.from(
-          contentWithoutStyleBlocks.matchAll(/class="([^"]+?)"/g)
+          contentWithoutStyleBlocks.matchAll(/class="([^"]+?)"/g),
         ).map((match) => match[1]);
         const styles = classes.flatMap((styles) => styles.split(" "));
 
         const ids = Array.from(
-          contentWithoutStyleBlocks.matchAll(/id="([^"]+?)"/g)
+          contentWithoutStyleBlocks.matchAll(/id="([^"]+?)"/g),
         ).map((match) => match[1]);
 
         const tags = Array.from(
-          contentWithoutStyleBlocks.matchAll(/<(\w[\w-]*?)[^\w-]/g)
+          contentWithoutStyleBlocks.matchAll(/<(\w[\w-]*?)[^\w-]/g),
         ).map((match) => match[1]);
 
         return styles.concat(ids).concat(tags);
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
         /^router-link(|-exact)-active$/,
         /data-v-.*/,
       ],
-    })
+    }),
   );
 }
 

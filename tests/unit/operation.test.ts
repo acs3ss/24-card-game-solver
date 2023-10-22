@@ -37,7 +37,7 @@ describe("Operations", () => {
 
       test("Joins strings with -", () => {
         expect(Subtract.toString("(2 + 1)", "(3 * 4)")).toBe(
-          "(2 + 1) - (3 * 4)"
+          "(2 + 1) - (3 * 4)",
         );
       });
     });
@@ -55,7 +55,7 @@ describe("Operations", () => {
 
       test("Joins strings with *", () => {
         expect(Multiply.toString("(2 - 1)", "(3 / 4)")).toBe(
-          "(2 - 1) * (3 / 4)"
+          "(2 - 1) * (3 / 4)",
         );
       });
     });
@@ -89,7 +89,7 @@ describe("Operations", () => {
 
       test("Joins strings with ^", () => {
         expect(Exponent.toString("(2 - 1)", "(3 * 4)")).toBe(
-          "(2 - 1) ^ (3 * 4)"
+          "(2 - 1) ^ (3 * 4)",
         );
       });
     });
