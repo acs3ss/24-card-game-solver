@@ -10,11 +10,7 @@ export default defineConfig({
       manifest: {
         name: "24 Solver",
         short_name: "24 Solver",
-        start_url: "./",
-        display: "standalone",
         background_color: "black",
-        lang: "en",
-        scope: "./",
         icons: [
           {
             src: "/icons/72.png",
