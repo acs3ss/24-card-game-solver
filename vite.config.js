@@ -13,27 +13,27 @@ export default defineConfig({
         background_color: "black",
         icons: [
           {
-            src: "/icons/72.png",
+            src: "icons/72.png",
             sizes: "72x72",
             type: "image/png",
           },
           {
-            src: "/icons/128.png",
+            src: "icons/128.png",
             sizes: "128x128",
             type: "image/png",
           },
           {
-            src: "/icons/144.png",
+            src: "icons/144.png",
             sizes: "144x144",
             type: "image/png",
           },
           {
-            src: "/icons/192.png",
+            src: "icons/192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/icons/512.png",
+            src: "icons/512.png",
             sizes: "512x512",
             type: "image/png",
           },
