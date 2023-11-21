@@ -10,10 +10,6 @@ updates:
       typescript-eslint:
         patterns:
         - "@typescript-eslint/*"
-      playwright:
-        patterns:
-        - "@playwright/*"
-        - "playwright"
 
   - package-ecosystem: "github-actions"
     directory: "/"
