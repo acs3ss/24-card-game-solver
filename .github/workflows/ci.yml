@@ -33,7 +33,7 @@ jobs:
         run: npm run test
 
       - name: Upload Playright report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always() # Even on failure
         with:
           name: playwright-report
