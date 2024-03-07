@@ -3,8 +3,7 @@
         "dbaeumer.vscode-eslint",
         "ms-edgedevtools.vscode-edge-devtools",
         "vue.volar",
-        "vue.vscode-typescript-vue-plugin",
-        "zixuanchen.vitest-explorer",
+        "vitest.explorer",
         "ms-playwright.playwright"
     ]
 }
