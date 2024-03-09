@@ -5,9 +5,12 @@ const { needRefresh, updateServiceWorker } = useRegisterSW({
   onRegisteredSW(url, registration) {
     if (registration) {
       // Check every hour for updates (which if found will then show the reload prompt)
-      setInterval(() => {
-        registration.update();
-      }, 60 * 60 * 1000);
+      setInterval(
+        () => {
+          registration.update();
+        },
+        60 * 60 * 1000,
+      );
     }
   },
 });

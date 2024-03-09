@@ -80,7 +80,7 @@ test.describe("Functionality", () => {
     const button = page.getByRole("button", { name: "Show solutions" });
     test.fail(
       (await button.getAttribute("disabled")) !== null,
-      "No solutions after 5 tries"
+      "No solutions after 5 tries",
     );
 
     const selects = await page.getByLabel("Card ").all();
@@ -95,7 +95,7 @@ test.describe("Functionality", () => {
 
     const solutions = await page.locator("pre").all();
     const texts = await Promise.all(
-      solutions.map((solution) => solution.innerText())
+      solutions.map((solution) => solution.innerText()),
     );
     for (const text of texts) {
       const numbers = text
@@ -123,7 +123,7 @@ test.describe("Functionality", () => {
     const button = page.getByRole("button", { name: "Show solutions" });
     test.fail(
       (await button.getAttribute("disabled")) !== null,
-      "No solutions after 5 tries"
+      "No solutions after 5 tries",
     );
 
     await button.click();
@@ -162,7 +162,7 @@ test.describe("Accessibility", () => {
   test("Solutions are accessible", async ({ page }, { project }) => {
     test.skip(
       process.env.CI !== undefined && project.name === "Mobile Safari",
-      "Times out in mobile Safari on CI"
+      "Times out in mobile Safari on CI",
     );
 
     await page.goto("/");
@@ -179,7 +179,7 @@ test.describe("Accessibility", () => {
     const button = page.getByRole("button", { name: "Show solutions" });
     test.fail(
       (await button.getAttribute("disabled")) !== null,
-      "No solutions after 5 tries"
+      "No solutions after 5 tries",
     );
     await button.click();
 
