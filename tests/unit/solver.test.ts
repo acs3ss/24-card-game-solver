@@ -20,14 +20,4 @@ describe("Solver", () => {
       expect(solutions.length).toBe(0);
     });
   });
-
-  // describe("print", () => {
-  //   test("Pretty-prints solutions", () => {
-  //     const solutions = solve([2, 3, 10, 10]);
-  //     const output = print(solutions);
-  //     expect(solutions.length).toBe(output.length);
-  //     expect(output).toContain("((10 - 3) * 2) + 10");
-  //     expect(output).toContain("(2 ^ 10) - (10 ^ 3)");
-  //   });
-  // });
 });

@@ -1,12 +1,6 @@
 import { BaseN, Permutation } from "js-combinatorics";
 import * as operations from "./operation";
 
-// interface Solution {
-//   operations: operations.Operation[];
-//   parentheses: 0 | 1 | 2 | 3 | 4;
-//   solution: number[];
-// }
-
 const ops = [
   operations.Add,
   operations.Subtract,
@@ -44,7 +38,6 @@ export interface Expression {
  * @returns The solutions as described using Polish notation.
  */
 export function solve(hand: number[]): Expression[] {
-  // const solutions: Solution[] = [];
   const solutions: Expression[] = [];
   const hands: number[][] = [];
   for (let i = 0; i < 2 ** hand.filter((card) => card > 10).length; i++) {
@@ -86,11 +79,6 @@ export function solve(hand: number[]): Expression[] {
               right: solution[3],
             },
           });
-          // solutions.push({
-          //   operations,
-          //   parentheses: 0,
-          //   solution,
-          // });
         }
 
         // ((a b) c) d
@@ -111,11 +99,6 @@ export function solve(hand: number[]): Expression[] {
             },
             right: solution[3],
           });
-          // solutions.push({
-          //   operations,
-          //   parentheses: 1,
-          //   solution,
-          // });
         }
 
         // (a (b c)) d
@@ -136,11 +119,6 @@ export function solve(hand: number[]): Expression[] {
             },
             right: solution[3],
           });
-          // solutions.push({
-          //   operations,
-          //   parentheses: 2,
-          //   solution,
-          // });
         }
 
         // a ((b c) d)
@@ -161,11 +139,6 @@ export function solve(hand: number[]): Expression[] {
               right: solution[3],
             },
           });
-          // solutions.push({
-          //   operations,
-          //   parentheses: 3,
-          //   solution,
-          // });
         }
 
         // a (b (c d))
@@ -186,47 +159,9 @@ export function solve(hand: number[]): Expression[] {
               },
             },
           });
-          // solutions.push({
-          //   operations,
-          //   parentheses: 4,
-          //   solution,
-          // });
         }
       }
     }
   }
   return solutions;
 }
-
-// export function print(solutions: Solution[]): string[] {
-//   const outputs: string[] = [];
-//   for (const { operations, parentheses, solution } of solutions) {
-//     if (parentheses === 0) {
-//       // (a b) (c d)
-//       const left = `(${operations[0].toString(solution[0], solution[1])})`;
-//       const right = `(${operations[1].toString(solution[2], solution[3])})`;
-//       outputs.push(operations[2].toString(left, right));
-//     } else if (parentheses === 1) {
-//       // ((a b) c) d
-//       const left = `(${operations[0].toString(solution[0], solution[1])})`;
-//       const right = `(${operations[1].toString(left, solution[2])})`;
-//       outputs.push(operations[2].toString(right, solution[3]));
-//     } else if (parentheses === 2) {
-//       // (a (b c)) d
-//       const left = `(${operations[0].toString(solution[1], solution[2])})`;
-//       const right = `(${operations[1].toString(solution[0], left)})`;
-//       outputs.push(operations[2].toString(right, solution[3]));
-//     } else if (parentheses === 3) {
-//       // a ((b c) d)
-//       const left = `(${operations[0].toString(solution[1], solution[2])})`;
-//       const right = `(${operations[1].toString(left, solution[3])})`;
-//       outputs.push(operations[2].toString(solution[0], right));
-//     } else if (parentheses === 4) {
-//       // a (b (c d))
-//       const left = `(${operations[0].toString(solution[2], solution[3])})`;
-//       const right = `(${operations[1].toString(solution[1], left)})`;
-//       outputs.push(operations[2].toString(solution[0], right));
-//     }
-//   }
-//   return outputs;
-// }
