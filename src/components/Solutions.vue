@@ -21,7 +21,10 @@
         :key="index"
         class="col-12 col-sm-4 col-md-3 col-lg-2"
       >
-        <MathExpression :expression="solution" />
+        <MathExpression
+          :expression="solution"
+          :priority="Number.NEGATIVE_INFINITY"
+        />
       </math>
     </div>
   </div>
