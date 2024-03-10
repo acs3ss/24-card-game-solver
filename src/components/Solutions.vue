@@ -15,14 +15,13 @@
         Draw again
       </button>
     </div>
-    <div v-if="showSolutions" class="row my-3">
+    <div v-if="showSolutions" class="row align-items-center my-3 row-gap-3">
       <math
         v-for="(solution, index) in solutions"
         :key="index"
-        class="text-center col-12 col-sm-4 col-md-3 col-lg-2"
+        class="col-12 col-sm-4 col-md-3 col-lg-2"
       >
         <MathExpression :expression="solution" />
-        <!-- {{ solution }} -->
       </math>
     </div>
   </div>
