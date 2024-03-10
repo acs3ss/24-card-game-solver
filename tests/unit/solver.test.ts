@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { solve } from "../../src/solver";
+import { solve, type Expression } from "../../src/solver";
 
 describe("Solver", () => {
   describe("solve", () => {
@@ -10,7 +10,27 @@ describe("Solver", () => {
 
     test("Adds extra hands where numbers above 10 are substituted for 10", () => {
       const solutions = solve([1, 1, 2, 12]);
-      const permutations = solutions.map((solution) => solution.solution);
+
+      const getNumbersFromExpression = (expression: Expression): number[] => {
+        const numbers = [];
+        if (typeof expression.left !== "number") {
+          numbers.push(...getNumbersFromExpression(expression.left));
+        } else {
+          numbers.push(expression.left);
+        }
+
+        if (typeof expression.right !== "number") {
+          numbers.push(...getNumbersFromExpression(expression.right));
+        } else {
+          numbers.push(expression.right);
+        }
+
+        return numbers;
+      };
+
+      const permutations = solutions.map((expression) =>
+        getNumbersFromExpression(expression),
+      );
       expect(permutations).toContainEqual([1, 1, 2, 12]);
       expect(permutations).toContainEqual([1, 1, 2, 10]);
     });
