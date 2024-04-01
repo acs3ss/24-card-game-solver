@@ -30,7 +30,7 @@
     "@axe-core/playwright": "^4.8.5",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@playwright/test": "^1.42.1",
-    "@testing-library/vue": "^8.0.2",
+    "@testing-library/vue": "^8.0.3",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-vue": "^5.0.4",
