@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.9.0",
-    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@fullhuman/postcss-purgecss": "^6.0.0",
     "@playwright/test": "^1.43.1",
     "@testing-library/vue": "^8.0.3",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
