@@ -27,7 +27,7 @@
     "vue": "^3.4.38"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.9.1",
+    "@axe-core/playwright": "^4.10.0",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "@playwright/test": "^1.45.3",
     "@testing-library/vue": "^8.1.0",
