@@ -21,7 +21,7 @@ import { computed, ref } from "vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 import Hand, { type Card } from "./components/Hand.vue";
 import Solutions from "./components/Solutions.vue";
-import { Solver } from "./solver";
+import * as Solver from "./solver";
 
 const getRandomValue = () => 1 + Math.floor(Math.random() * 13);
 
