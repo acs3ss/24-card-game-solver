@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { Solver } from "../../src/solver";
+import * as Solver from "../../src/solver";
 
 describe("Solver", () => {
   describe("solve", () => {
