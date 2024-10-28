@@ -26,6 +26,7 @@ const emit = defineEmits<{
   handUpdated: [card: Card];
 }>();
 
-const updateHand = (id: number, value: number) =>
+const updateHand = (id: number, value: number) => {
   emit("handUpdated", { id, value });
+};
 </script>

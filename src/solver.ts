@@ -128,7 +128,7 @@ export function print(solutions: Solution[]): string[] {
       const left = `(${operations[0].toString(solution[1], solution[2])})`;
       const right = `(${operations[1].toString(left, solution[3])})`;
       outputs.push(operations[2].toString(solution[0], right));
-    } else if (parentheses === 4) {
+    } else {
       // a (b (c d))
       const left = `(${operations[0].toString(solution[2], solution[3])})`;
       const right = `(${operations[1].toString(solution[1], left)})`;
