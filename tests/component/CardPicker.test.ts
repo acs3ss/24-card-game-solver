@@ -25,7 +25,7 @@ describe("CardPicker", () => {
     screen.getByTestId("card");
   });
 
-  test("Renders a random card on load", async () => {
+  test("Renders a random card on load", () => {
     render(CardPicker, { props });
     const card = screen.getByTestId("card");
 

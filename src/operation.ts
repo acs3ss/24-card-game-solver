@@ -1,6 +1,6 @@
 export interface Operation {
   operate(a: number, b: number): number;
-  toString(a: unknown, b: unknown): string;
+  toString(a: number | string, b: number | string): string;
 }
 
 export const Add: Operation = {
@@ -8,7 +8,7 @@ export const Add: Operation = {
     return a + b;
   },
 
-  toString(a: unknown, b: unknown): string {
+  toString(a: number | string, b: number | string): string {
     return `${a} + ${b}`;
   },
 };
@@ -18,7 +18,7 @@ export const Subtract: Operation = {
     return a - b;
   },
 
-  toString(a: unknown, b: unknown): string {
+  toString(a: number | string, b: number | string): string {
     return `${a} - ${b}`;
   },
 };
@@ -28,7 +28,7 @@ export const Multiply: Operation = {
     return a * b;
   },
 
-  toString(a: unknown, b: unknown): string {
+  toString(a: number | string, b: number | string): string {
     return `${a} * ${b}`;
   },
 };
@@ -38,7 +38,7 @@ export const Divide: Operation = {
     return a / b;
   },
 
-  toString(a: unknown, b: unknown): string {
+  toString(a: number | string, b: number | string): string {
     return `${a} / ${b}`;
   },
 };
@@ -48,7 +48,7 @@ export const Exponent: Operation = {
     return a ** b;
   },
 
-  toString(a: unknown, b: unknown): string {
+  toString(a: number | string, b: number | string): string {
     return `${a} ^ ${b}`;
   },
 };
@@ -58,7 +58,7 @@ export const Log: Operation = {
     return Math.log(b) / Math.log(a);
   },
 
-  toString(a: unknown, b: unknown): string {
+  toString(a: number | string, b: number | string): string {
     return `log_${a}(${b})`;
   },
 };
