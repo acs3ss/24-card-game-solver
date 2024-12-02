@@ -1,9 +1,9 @@
-import purgecss from "@fullhuman/postcss-purgecss";
+import { purgeCSSPlugin } from "@fullhuman/postcss-purgecss";
 
 const plugins = [];
 if (process.env.NODE_ENV === "production") {
   plugins.push(
-    purgecss({
+    purgeCSSPlugin({
       content: [`index.html`, `./src/**/*.vue`],
       defaultExtractor(content) {
         const contentWithoutStyleBlocks = content.replace(
