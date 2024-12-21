@@ -30,7 +30,8 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      // Use new headless mode https://playwright.dev/docs/browsers#chromium-new-headless-mode
+      use: { ...devices["Desktop Chrome"], channel: "chromium" },
     },
 
     {
