@@ -1,12 +1,13 @@
 import pluginVue from "eslint-plugin-vue";
-import vueTsEslintConfig from "@vue/eslint-config-typescript";
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+} from "@vue/eslint-config-typescript";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
-export default [
-  ...pluginVue.configs["flat/recommended"],
-  ...vueTsEslintConfig({
-    extends: ["strictTypeChecked"],
-  }),
+export default defineConfigWithVueTs(
+  pluginVue.configs["flat/recommended"],
+  vueTsConfigs.strictTypeChecked,
   {
     files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.vue"],
     rules: {
@@ -32,4 +33,4 @@ export default [
     },
   },
   eslintPluginPrettierRecommended,
-];
+);
