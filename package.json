@@ -31,7 +31,7 @@
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@playwright/test": "^1.51.0",
     "@testing-library/vue": "^8.1.0",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.2.3",
     "@vue/eslint-config-typescript": "^14.5.0",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.22.0",
