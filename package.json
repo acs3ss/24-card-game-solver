@@ -24,7 +24,7 @@
   "dependencies": {
     "bootstrap": "^5.3.6",
     "js-combinatorics": "^2.1.2",
-    "vue": "^3.5.15"
+    "vue": "^3.5.16"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
