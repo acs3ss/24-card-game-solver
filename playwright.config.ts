@@ -22,15 +22,16 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "http://localhost:5173",
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    /* Collect trace for failed tests. See https://playwright.dev/docs/trace-viewer */
+    trace: "retain-on-first-failure",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      // Use new headless mode https://playwright.dev/docs/browsers#chromium-new-headless-mode
+      use: { ...devices["Desktop Chrome"], channel: "chromium" },
     },
 
     {
@@ -46,7 +47,7 @@ export default defineConfig({
     /* Test against mobile viewports. */
     {
       name: "Mobile Chrome",
-      use: { ...devices["Pixel 5"] },
+      use: { ...devices["Pixel 5"], channel: "chromium" },
     },
     {
       name: "Mobile Safari",

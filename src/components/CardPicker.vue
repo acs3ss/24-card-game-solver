@@ -52,7 +52,9 @@ const emit = defineEmits<{
 // Use selected as a "proxy" since props.value is readonly
 const selected = computed({
   get: () => props.value,
-  set: (newValue) => emit("select", newValue),
+  set: (newValue) => {
+    emit("select", newValue);
+  },
 });
 
 const getRandomSuit = () => suits[Math.floor(Math.random() * suits.length)];

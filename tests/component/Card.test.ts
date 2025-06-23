@@ -6,7 +6,7 @@ describe("Card", () => {
   const props = {
     id: 1,
     rank: 3,
-    suit: "hearts",
+    suit: "hearts" as "hearts" | "diamonds" | "clubs" | "spades",
   };
 
   afterEach(() => {
