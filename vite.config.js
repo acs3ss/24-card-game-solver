@@ -1,4 +1,5 @@
 import { defineConfig } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 
@@ -52,9 +53,17 @@ export default defineConfig({
   // Use relative paths (don't assume we're at the domain root)
   base: "./",
   test: {
-    environment: "jsdom",
-    globals: true,
     include: ["tests/**/*.test.ts"],
     exclude: ["tests/e2e"],
+    setupFiles: ["vitest-browser-vue"],
+    browser: {
+      provider: playwright(),
+      enabled: true,
+      instances: [
+        { browser: "chromium" },
+        { browser: "firefox" },
+        { browser: "webkit" },
+      ],
+    },
   },
 });
