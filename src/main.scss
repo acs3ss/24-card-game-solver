@@ -58,55 +58,56 @@ a {
     stroke: var(--bs-body-color);
 }
 
+// Styles used to be through selectors like `.card.heart .suit`,
+// but at some point browsers implemented stronger shadow boundaries
+// that break the descendant combinators.
+// To get styles working around that, define the suit colors directly,
+// then reference those colors without the outer `.card.*` selector.
 .card {
     &.clubs, &.spades {
-        .suit {
-            fill: var(--bs-body-color);
-        }
-
-        .rank {
-            stroke: var(--bs-body-color);
-        }
+        --suit-color: var(--bs-body-color);
     }
 
     &.hearts, &.diamonds {
-        .suit {
-            fill: $red;
-        }
-
-        .rank {
-            stroke: $red;
-        }
+        --suit-color: #{$red};
     }
+}
 
-    .face-background {
-        fill: var(--bs-body-bg);
-        stroke: $blue;
-    }
+.suit {
+    fill: var(--suit-color);
+}
 
-    .face-accent-gold {
-        fill: $yellow;
-    }
+.rank {
+    stroke: var(--suit-color);
+}
 
-    .face-accent-red {
-        fill: $red;
-    }
+.face-background {
+    fill: var(--bs-body-bg);
+    stroke: $blue;
+}
 
-    .face-accent-blue {
-        fill: $blue;
-    }
+.face-accent-gold {
+    fill: $yellow;
+}
 
-    .face-accent-face {
-        fill: $blue;
-    }
+.face-accent-red {
+    fill: $red;
+}
 
-    .face-accent-black {
-        fill: var(--bs-body-color);
-    }
+.face-accent-blue {
+    fill: $blue;
+}
 
-    .face-stroke {
-        stroke: $blue;
-    }
+.face-accent-face {
+    fill: $blue;
+}
+
+.face-accent-black {
+    fill: var(--bs-body-color);
+}
+
+.face-stroke {
+    stroke: $blue;
 }
 
 @include color-mode(dark) {
@@ -115,18 +116,16 @@ a {
         --bs-toast-header-color: var(--bs-body-color);
     }
 
-    .card {
-        .face-background {
-            stroke: var(--bs-body-color);
-        }
+    .face-background {
+        stroke: var(--bs-body-color);
+    }
 
-        .face-accent-face {
-            fill: var(--bs-body-color);
-        }
+    .face-accent-face {
+        fill: var(--bs-body-color);
+    }
 
-        .face-stroke {
-            stroke: var(--bs-body-color);
-        }
+    .face-stroke {
+        stroke: var(--bs-body-color);
     }
 }
 /* purgecss end ignore */
