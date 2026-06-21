@@ -25,6 +25,18 @@ $color-mode-type: media-query;
 
 // Everything in this file is relevant, so exclude it from purging
 /* purgecss start ignore */
+html {
+    // All of our main styles assume a full-width container.
+    // For example, we lay out the 4 cards based on a percentage of the max-width.
+    // However, vw doesn't take the width of the scrollbar into account!
+    // This means that when a lot of solutions exist (enough to necessitate a scrollbar),
+    // the card grid styling breaks and we instead get 3 cards on the first row,
+    // and an unwanted second row with just one card.
+    // We can fix this by setting scrollbar-gutter to `stable` to _always_ reserve space for the scrollbar, even when it isn't present.
+    // That subtly adds a bit more whitespace to the right of the page, so also specify `both-edges` to balance it out.
+    scrollbar-gutter: stable both-edges;
+}
+
 @media (prefers-reduced-motion: no-preference) {
     $duration: 0.5s;
     $timing: ease-in-out;

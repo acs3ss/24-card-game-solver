@@ -15,7 +15,7 @@
         Draw again
       </button>
     </div>
-    <div v-if="showSolutions" class="row align-items-center my-3 row-gap-3">
+    <div v-if="showSolutions" class="row align-items-center my-3 row-gap-3 mx-0">
       <math
         v-for="(solution, index) in solutions"
         :key="index"
