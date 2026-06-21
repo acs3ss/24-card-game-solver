@@ -151,9 +151,7 @@ test.describe("Functionality", () => {
 
 test.describe("UI", () => {
   for (const colorScheme of ["light", "dark"] as const) {
-    test(`Initial page snapshot is valid in ${colorScheme} mode`, async ({
-      page,
-    }) => {
+    test.beforeEach(async ({ page }) => {
       await page.addInitScript(() => {
         let counter = 0;
         Math.random = () => {
@@ -163,13 +161,18 @@ test.describe("UI", () => {
         };
       });
 
-      await page.emulateMedia({ colorScheme });
       await page.goto("/");
 
       await page.getByLabel("Card 1").selectOption("4");
       await page.getByLabel("Card 2").selectOption("11"); // Jack
       await page.getByLabel("Card 3").selectOption("12"); // Queen
       await page.getByLabel("Card 4").selectOption("13"); // King
+    });
+
+    test(`Initial page snapshot is valid in ${colorScheme} mode`, async ({
+      page,
+    }) => {
+      await page.emulateMedia({ colorScheme });
 
       await expect(page).toHaveScreenshot(`page-initial-${colorScheme}.png`, {
         fullPage: true,
@@ -179,22 +182,7 @@ test.describe("UI", () => {
     test(`Page with solutions snapshot is valid in ${colorScheme} mode`, async ({
       page,
     }) => {
-      await page.addInitScript(() => {
-        let counter = 0;
-        Math.random = () => {
-          const value = counter / 4;
-          counter = (counter + 1) % 4;
-          return value;
-        };
-      });
-
       await page.emulateMedia({ colorScheme });
-      await page.goto("/");
-
-      await page.getByLabel("Card 1").selectOption("4");
-      await page.getByLabel("Card 2").selectOption("11"); // Jack
-      await page.getByLabel("Card 3").selectOption("12"); // Queen
-      await page.getByLabel("Card 4").selectOption("13"); // King
 
       const button = page.getByRole("button", { name: "Show solutions" });
       await button.click();
