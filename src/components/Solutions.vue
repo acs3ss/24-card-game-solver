@@ -15,7 +15,7 @@
         Draw again
       </button>
     </div>
-    <div v-if="showSolutions" class="row my-3">
+    <div v-if="showSolutions" class="row my-3 mx-0">
       <pre
         v-for="(solution, index) in solutions"
         :key="index"
