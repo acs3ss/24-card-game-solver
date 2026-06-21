@@ -67,11 +67,11 @@ const getRandomSuit = () => suits[Math.floor(Math.random() * suits.length)];
 // because higher zooms mean less width and the queries won't trigger.
 .card-responsive {
   @media (orientation: portrait) {
-    max-width: 50vw;
+    max-width: 50%;
   }
 
   @media (min-width: 972px) {
-    max-width: 25vw;
+    max-width: 25%;
   }
 }
 </style>
