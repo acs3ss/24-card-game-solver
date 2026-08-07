@@ -29,7 +29,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
     "@fullhuman/postcss-purgecss": "^8.0.0",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/eslint-config-typescript": "^14.9.0",
